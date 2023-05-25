@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  onDetail(){
+    console.log('masuk')
+    this.router.navigate(['products',1],{relativeTo:this.route, queryParamsHandling:'preserve'})
   }
 
 }
