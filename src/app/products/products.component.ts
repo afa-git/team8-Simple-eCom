@@ -13,9 +13,9 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onDetail(){
+  onDetail(id:String){
     console.log('masuk')
-    this.router.navigate(['products',1],{relativeTo:this.route, queryParamsHandling:'preserve'})
+    this.router.navigate(['products',id])
   }
 
 }

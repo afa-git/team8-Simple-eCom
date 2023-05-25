@@ -8,8 +8,16 @@ import { Component, OnInit } from '@angular/core';
 export class ProductDetailComponent implements OnInit {
 
   constructor() { }
-
   ngOnInit(): void {
+  }
+
+  onClickImg(id:number){
+    // let ProductImg = document.getElementById("ProductImg") as HTMLImageElement | null;
+    // let SmallImg = document.getElementsByClassName("small-img");
+    // if(ProductImg && SmallImg){
+    //   ProductImg.src = SmallImg[id].src
+    // }
+    
   }
 
 }
