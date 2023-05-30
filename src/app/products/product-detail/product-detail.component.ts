@@ -12,12 +12,11 @@ export class ProductDetailComponent implements OnInit {
   }
 
   onClickImg(id:number){
-    // let ProductImg = document.getElementById("ProductImg") as HTMLImageElement | null;
-    // let SmallImg = document.getElementsByClassName("small-img");
-    // if(ProductImg && SmallImg){
-    //   ProductImg.src = SmallImg[id].src
-    // }
-    
+    let ProductImg = document.getElementById("ProductImg") as HTMLImageElement | null;
+    let SmallImg:any = document.getElementsByClassName("small-img");
+    if(ProductImg && SmallImg){
+      ProductImg.src = SmallImg[id].src
+    }
   }
 
 }

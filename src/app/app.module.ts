@@ -7,12 +7,16 @@ import { ProductsComponent } from './products/products.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthComponent } from './auth/auth.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   {path: '', component:DashboardComponent},
   {path: 'dashboard',component:DashboardComponent},
   {path: 'products', component:ProductsComponent},
-  {path: 'products/:id', component:ProductDetailComponent}
+  {path: 'products/:id', component:ProductDetailComponent},
+  {path: 'auth', component:AuthComponent}
+
 ];
 
 @NgModule({
@@ -21,11 +25,14 @@ const appRoutes: Routes = [
     HeaderComponent,
     ProductsComponent,
     ProductDetailComponent,
-    DashboardComponent
+    DashboardComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
