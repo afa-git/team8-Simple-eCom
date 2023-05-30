@@ -7,16 +7,16 @@ import { ProductsComponent } from './products/products.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthComponent } from './auth/auth.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductAddComponent } from './products/product-add/product-add.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   {path: '', component:DashboardComponent},
   {path: 'dashboard',component:DashboardComponent},
   {path: 'products', component:ProductsComponent},
-  {path: 'products/:id', component:ProductDetailComponent},
-  {path: 'product-add', component:ProductAddComponent}
+  {path: 'products/:id', component:ProductDetailComponent}
 ];
 
 @NgModule({
@@ -26,13 +26,15 @@ const appRoutes: Routes = [
     ProductsComponent,
     ProductDetailComponent,
     DashboardComponent,
-    ProductAddComponent
+    ProductAddComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

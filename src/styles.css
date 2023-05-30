@@ -79,18 +79,26 @@ p{
 }
 .btn{
     display: inline-block;
-    background: #ff523b;
     color: white;
     padding: 8px 30px;
     margin: 30px 0;
     border-radius: 30px;
     transition: background 0.5s;
 }
+
+.btn-primary{
+    background: #ff523b;
+    display: inline-block;
+    color: white;
+    border-color: #ff523b;
+}
+
+
 .btn:hover{
     background: #563434;
 }
 .header{
-    background: radial-gradient(#fff,#ffd6d6);
+    background: radial-gradient(#fff,#ffffff);
 }
 .header .row{
     margin-top: 70px;

@@ -17,7 +17,6 @@ export class ProductDetailComponent implements OnInit {
     if(ProductImg && SmallImg){
       ProductImg.src = SmallImg[id].src
     }
-    
   }
 
 }
