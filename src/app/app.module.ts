@@ -7,12 +7,16 @@ import { ProductsComponent } from './products/products.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProductAddComponent } from './products/product-add/product-add.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   {path: '', component:DashboardComponent},
   {path: 'dashboard',component:DashboardComponent},
   {path: 'products', component:ProductsComponent},
-  {path: 'products/:id', component:ProductDetailComponent}
+  {path: 'products/:id', component:ProductDetailComponent},
+  {path: 'product-add', component:ProductAddComponent}
 ];
 
 @NgModule({
@@ -21,11 +25,14 @@ const appRoutes: Routes = [
     HeaderComponent,
     ProductsComponent,
     ProductDetailComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProductAddComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
