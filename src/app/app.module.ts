@@ -9,6 +9,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthComponent } from './auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './register/register.component';
+import { AuthService } from './services/auth.service';
+import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductAddComponent } from './products/product-add/product-add.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -17,6 +20,8 @@ const appRoutes: Routes = [
   {path: 'dashboard',component:DashboardComponent},
   {path: 'products', component:ProductsComponent},
   {path: 'products/:id', component:ProductDetailComponent},
+  {path: 'auth', component:AuthComponent},
+  {path: 'register', component:RegisterComponent},
   {path: 'product-add', component:ProductAddComponent},
 ];
 
@@ -27,12 +32,16 @@ const appRoutes: Routes = [
     ProductsComponent,
     ProductDetailComponent,
     DashboardComponent,
+    AuthComponent,
+    RegisterComponent,
+    ProductListComponent,
     ProductAddComponent,
     AuthComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
+    HttpClientModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule
@@ -40,8 +49,6 @@ const appRoutes: Routes = [
   providers: [],
   bootstrap: [AppComponent]
 })
-
-
 
 
 export class AppModule { }

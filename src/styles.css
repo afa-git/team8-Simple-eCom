@@ -86,12 +86,6 @@ p{
     transition: background 0.5s;
 }
 
-.btn-primary{
-    background: #ff523b;
-    display: inline-block;
-    color: white;
-    border-color: #ff523b;
-}
 
 
 .btn:hover{

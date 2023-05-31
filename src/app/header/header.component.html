@@ -9,10 +9,11 @@
                     <li><a [routerLink]="['dashboard']">Home</a></li>
                     <li><a [routerLink]="['products']">Products</a></li>
                     <li><a href="">About</a></li>
-                    <li><a [routerLink]="['auth']">Sign In</a></li>
+                    <li><a [routerLink]="['auth']" *ngIf="!isAuthenticated">Sign In</a></li>
+                    <li><a (click)="onLogout()"  *ngIf="isAuthenticated" >Logout</a></li>
                 </ul>
             </nav>
-            <a href="cart.html"><img src="../../assets/images/cart.png" width="30px" height="30px"></a>
+            <a href="cart.html"><img src="../../assets/images/cart.png" width="30px" height="30px" *ngIf="isAuthenticated"></a>
             <img src="../../assets/images/menu.png" class="menu-icon" onclick="menutoggle()">
         </div>
     </div>
