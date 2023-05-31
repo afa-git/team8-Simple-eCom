@@ -11,8 +11,9 @@ import { AuthComponent } from './auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { AuthService } from './services/auth.service';
-import { HttpClientModule } from '@angular/common/http';
 import { ProductListComponent } from './products/product-list/product-list.component';
+import { ProductAddComponent } from './products/product-add/product-add.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 const appRoutes: Routes = [
   {path: '', component:DashboardComponent},
@@ -20,8 +21,8 @@ const appRoutes: Routes = [
   {path: 'products', component:ProductsComponent},
   {path: 'products/:id', component:ProductDetailComponent},
   {path: 'auth', component:AuthComponent},
-  {path: 'register', component:RegisterComponent}
-
+  {path: 'register', component:RegisterComponent},
+  {path: 'product-add', component:ProductAddComponent},
 ];
 
 @NgModule({
@@ -33,13 +34,16 @@ const appRoutes: Routes = [
     DashboardComponent,
     AuthComponent,
     RegisterComponent,
-    ProductListComponent
+    ProductListComponent,
+    ProductAddComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule
   ],
   providers: [],
