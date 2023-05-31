@@ -1,6 +1,8 @@
+
+  <!-- Single Products -->
   <div class="small-container">
     <div class="row">
-        <h2 class="title">Sign In</h2>
+        <h2 class="title">Sign up</h2>
         <div class="col-6">
             <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
                 <div class="form-group">
@@ -24,9 +26,9 @@
                 <div>
                     <button class="btn btn-primary" type="submit"
                     [disabled]="!authForm.valid">
-                    Login
+                    Sign Up
                     </button> 
-                    <p class="text-center"><b>Belum</b>  punya account yukk daftar <a class="font-weight-bold" href="" style="font-size: 17px; color: blue;" (click)="onRegister()">sini</a></p>
+                    <p class="text-center"><b>Sudah</b>  punya account <a class="font-weight-bold" href="" style="font-size: 17px; color: blue;" (click)="onLogin()">sini</a></p>
                 </div>
             </form>
         </div>

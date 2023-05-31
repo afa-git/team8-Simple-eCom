@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthRequestData, AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -7,23 +9,43 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-  signupForm! : FormGroup;
-  constructor() { }
+  constructor(private router:Router,private authService:AuthService) { }
 
   ngOnInit(): void {
-    this.signupForm = new FormGroup({
-      'userData': new FormGroup({
-        'email': new FormControl(null,[Validators.required,Validators.email]),
-        'password': new FormControl(null,Validators.required)
-      })
-    })
+    
   }
 
-  onSubmit() {
-    console.log(this.signupForm.status);
-    if(this.signupForm.status === 'INVALID'){
-      alert("Email And Password are "+this.signupForm.status)
+
+  onSubmit(authForm: NgForm){
+
+    if(!authForm.valid)
+      return
+
+    console.log(authForm);
+
+    const email = authForm.value.email
+    const password = authForm.value.password
+    const authReqData : AuthRequestData = {
+      email:email,
+      password:password,
+      returnSecureToken:true
     }
+
+    this.authService.signin(authReqData).subscribe(
+        resdata=>{
+          console.log('Berhasil Login')
+          console.log(resdata)
+        },
+        error =>{
+          console.log(error)
+        }
+    )
+
+    authForm.reset();
+  }
+
+  onRegister(){
+    this.router.navigate(['/register'])
   }
 
 
