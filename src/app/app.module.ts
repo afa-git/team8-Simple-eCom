@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductListComponent } from './products/product-list/product-list.component';
 
 const appRoutes: Routes = [
   {path: '', component:DashboardComponent},
@@ -31,7 +32,8 @@ const appRoutes: Routes = [
     ProductDetailComponent,
     DashboardComponent,
     AuthComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,

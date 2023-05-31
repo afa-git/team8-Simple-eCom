@@ -1,0 +1,19 @@
+export class TransactionProduct{
+    constructor(
+        id:string,
+        date_entry:Date,
+        product_id:string,
+        product_name:string,
+        description:string,
+        amount:string,
+        category_name:string,
+        status_trx:string,
+        user_id:string,
+        user_name:string,
+        date_modified:Date,
+        image_url:string,
+        ref_no:string,
+        from_acct:string,
+        payment_name:string,
+    ){}
+}
