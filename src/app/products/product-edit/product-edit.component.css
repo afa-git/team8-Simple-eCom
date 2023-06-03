@@ -64,7 +64,19 @@
     font-weight: 600;
     background-color:#058940;
     color: white;
-    width: 100%;
+    width: 48%;
+    cursor: pointer;
+  }
+  .formbold-btn-danger{
+    text-align: center;
+    font-size: 16px;
+    border-radius: 6px;
+    padding: 14px 32px;
+    border: none;
+    font-weight: 600;
+    background-color:#890905;
+    color: white;
+    width: 48%;
     cursor: pointer;
   }
   .formbold-btn:hover {
@@ -93,3 +105,17 @@
       width: 50%;
     }
   }
+  table, th , td  {
+    border: 1px solid rgb(199, 149, 149);
+    border-collapse: collapse;
+    padding: 5px;
+    width: 70%;
+  }
+ 
+  table tr:nth-child(odd) {
+    background-color: #fbf0f0;
+  }
+  table tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+ 

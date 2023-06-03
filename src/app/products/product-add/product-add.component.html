@@ -1,15 +1,16 @@
+<app-header-admin></app-header-admin>
 <div class="container">
     <div class="row">
-        <div class="col-3">
+        <!-- <div class="col-3">
             <h2>Welcome Admin, </h2><br> 
             <h4>Have a nice day ^^</h4>
             <p>Success isn't always about greatness. It;s about consistency. Consistent <br> hard work gains
                 success. Greatness will come.</p>
                 <img src="../../assets/images/image1.png">
-        </div>
+        </div>  -->
         
         <div class="col-2">
-            <h3 style="margin: 20px 50px 0px;color: brown">Add New Products</h3>
+            <!-- <h3 style="margin: 20px 50px 0px;color: brown">Add New Products</h3> -->
             <div class="formbold-main-wrapper">
                 <div class="formbold-form-wrapper">
                     <!-- <form > -->
@@ -28,16 +29,16 @@
                         />
                       </div>
                     <div class="formbold-mb-5">
-                      <label for="name" class="formbold-form-label"> Product Name</label>
+                      <label for="title" class="formbold-form-label"> Product Name</label>
                       <input
                         type="text"
-                        name="name"
-                        id="name"
+                        name="title"
+                        id="title"
                         placeholder="Product Name"
                         class="formbold-form-input"
                         required
                         ngModel
-                        name="name"
+                        name="title"
                       />
                     </div>
                     <div class="formbold-mb-5">
@@ -79,32 +80,9 @@
                           name="image_url"
                         />
                     </div>
+                    
                     <div class="formbold-mb-5">
-                        <label for="img_url_1" class="formbold-form-label"> Small Image URL</label>
-                        <input
-                          type="text"
-                          name="img_url_1"
-                          id="img_url_1"
-                          placeholder="Small Image URL 1"
-                          class="formbold-form-input"
-                          required
-                          ngModel
-                          name="img_url_1"
-                        />
-                        <input
-                          type="text"
-                          name="img_url_2"
-                          id="img_url_2"
-                          placeholder="Small Image URL 2"
-                          class="formbold-form-input"
-                          required
-                          ngModel
-                          name="img_url_2"
-                        />
-                        
-                    </div>
-                    <div class="formbold-mb-5">
-                    <label for="stocks" class="formbold-form-label"> Category </label>
+                    <label for="category" class="formbold-form-label"> Category </label>
                     <select id="category" name="category">
                         <option value="shoes">Shoes</option>
                         <option value="t-shirt">T-Shirt</option>
@@ -131,6 +109,7 @@
                     <button
                     class="formbold-btn"
                     type="submit"
+                    [disabled]="!postForm.valid"
                   >
                     Add New Product
                   </button>

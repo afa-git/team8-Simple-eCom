@@ -14,6 +14,11 @@ import { AuthService } from './services/auth.service';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductAddComponent } from './products/product-add/product-add.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ProductEditComponent} from './products/product-edit/product-edit.component'
+import { ShortenPipe } from './shorten.pipe';
+import { HeaderAdminComponent } from './admin/header-admin/header-admin.component';
+import { DashboardAdminComponent } from './admin/dashboard-admin/dashboard-admin.component';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
 
 const appRoutes: Routes = [
   {path: '', component:DashboardComponent},
@@ -22,7 +27,10 @@ const appRoutes: Routes = [
   {path: 'products/:id', component:ProductDetailComponent},
   {path: 'auth', component:AuthComponent},
   {path: 'register', component:RegisterComponent},
-  {path: 'product-add', component:ProductAddComponent},
+  {path: 'productadd', component:ProductAddComponent},
+  {path: 'productedit', component:ProductEditComponent},
+  {path: 'admin', component:DashboardAdminComponent},
+  {path: 'users', component:UserManagementComponent}
 ];
 
 @NgModule({
@@ -36,7 +44,12 @@ const appRoutes: Routes = [
     RegisterComponent,
     ProductListComponent,
     ProductAddComponent,
-    AuthComponent
+    AuthComponent,
+    ProductEditComponent,
+    ShortenPipe,
+    HeaderAdminComponent,
+    DashboardAdminComponent,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,

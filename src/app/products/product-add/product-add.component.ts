@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../product.service';
+import { ProductAdminService } from '../../services/product-admin.service';
 
 @Component({
   selector: 'app-product-add',
@@ -8,21 +8,22 @@ import { ProductService } from '../product.service';
 })
 export class ProductAddComponent implements OnInit {
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductAdminService) { }
 
   ngOnInit(): void {
     
   }
 
   onCreatePost(postData:{
+    id:string;
     trx_id:string;
-    name:string;
-    amount:number;
-    stocks:number;
+    title:string;
+    amount:string;
+    stocks:string;
     image_url:string;
     description:string;
-    img_url_1:string;
-    img_url_2:string;
+    category:string;
+    entry_date:Date;
   }) {
     // Send Http request
     this.productService.onCreatePost(postData);
