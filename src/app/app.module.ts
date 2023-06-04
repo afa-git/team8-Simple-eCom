@@ -19,7 +19,8 @@ import { ShortenPipe } from './shorten.pipe';
 import { HeaderAdminComponent } from './admin/header-admin/header-admin.component';
 import { DashboardAdminComponent } from './admin/dashboard-admin/dashboard-admin.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
-import { SimpleReportComponent } from './admin/simple-report/simple-report.component';
+import { SimpleReportComponent } from './admin/simple-report-product/simple-report.component';
+import { SimpleReportUserComponent } from './admin/simple-report-user/simple-report-user.component';
 
 const appRoutes: Routes = [
   {path: '', component:DashboardComponent},
@@ -32,7 +33,8 @@ const appRoutes: Routes = [
   {path: 'productedit', component:ProductEditComponent},
   {path: 'admin', component:DashboardAdminComponent},
   {path: 'users', component:UserManagementComponent},
-  {path: 'report', component:SimpleReportComponent}
+  {path: 'reportproducts', component:SimpleReportComponent},
+  {path: 'reportusers', component:SimpleReportUserComponent}
 ];
 
 @NgModule({
@@ -52,7 +54,8 @@ const appRoutes: Routes = [
     HeaderAdminComponent,
     DashboardAdminComponent,
     UserManagementComponent,
-    SimpleReportComponent
+    SimpleReportComponent,
+    SimpleReportUserComponent
   ],
   imports: [
     BrowserModule,

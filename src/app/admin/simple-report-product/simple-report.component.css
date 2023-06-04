@@ -5,6 +5,7 @@
   }
   body {
     font-family: "Inter", Arial, Helvetica, sans-serif;
+    font-size: 12px;
   }
   
   .formbold-btn {
@@ -44,4 +45,6 @@
     width: 595px;
     height: 842px;
   }
- 
+ .container {
+  font-size: 10px;
+ }
