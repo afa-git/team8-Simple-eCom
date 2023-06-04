@@ -1,14 +1,17 @@
 export class Product{
 
+
     constructor(
+        public trx_id:string,
         public name:string,
+        public amount:number,
+        public stocks:number,
+        public image_url:[],
         public description:string,
-        public amount:string,
-        public stock:string,
-        public image_url:string,
         public category:string,
-        public date_modified:Date,
         public id?:string
     ){}
+
+
 
 }

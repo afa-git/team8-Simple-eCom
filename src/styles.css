@@ -38,13 +38,14 @@ ul li ul.dropdown li {
     }
     ul li ul.dropdown {
     width:auto;
-    background: #f7eaea;
+    background: transparent;
     position: absolute;
     z-index: 999;
     display: none;
     }
     ul li a:hover {
-    background: #ffd6d6;
+    background: #ff523b;
+    color: white;   
     }
     ul li:hover ul.dropdown{
     display: block;
@@ -476,7 +477,7 @@ form a{
         position: absolute;
         top: 70px;
         left: 0;
-        background: #333;
+        background: transparent;
         width: 100%;
         overflow: hidden;
         transition: max-height 0.5s;
@@ -488,7 +489,7 @@ form a{
         margin-bottom: 10px;
     }
     nav ul li a{
-        color: white;
+        color: #333;
     }
     .menu-icon{
         display: block;

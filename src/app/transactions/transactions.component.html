@@ -1,0 +1,61 @@
+<div class="container">
+    <h2 class="title">Transaction Products</h2>
+    <div *ngFor="let transaction of dataTransactions">
+        <div class="card mb-5" >
+            <h5 class="card-header">Ref No : {{ transaction.ref_no }} - <span class="badge bg-primary">{{ transaction.status_trx | product:'status' }}</span></h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="{{ transaction.img_url }}" alt="">
+                    </div>
+                    <div class="col-8">
+                        <h5 class="card-title">{{ transaction.product_name }} - <small>{{ transaction.date_entry| date:'dd/MM/yyyy HH:mm' }}</small></h5>
+                        <h6 class="text-decoration-line-through">{{ transaction.amount | currency:'Rp ' }}</h6>
+                        <h6>{{ transaction.amount | product:'curr':transaction.ref_no | currency: 'Rp ' }}</h6>
+
+                        <h6>Size : {{ transaction.size }}</h6>
+                        <p class="card-text">{{ transaction.description }}</p>
+                        
+                        <!-- Status in chart -->
+                        <div *ngIf="transaction.status_trx == '0'">
+                            <app-transaction-form [dataTransaction]="transaction"></app-transaction-form>
+                            <a (click)="onCheckOutChart(transaction)" class="btn btn-primary" >Checkout Now</a> | <a  class="btn btn-primary">Reject</a>
+                        </div>
+
+                        <!-- "Pending Payment" -->
+                        <div *ngIf="transaction.status_trx == '1'">
+                            
+                            <a (click)="onCheckOutChart(transaction)" class="btn btn-success" >I Already Paid</a>
+                        </div>
+
+                        <!-- "Pending Approve" -->
+                        <div *ngIf="transaction.status_trx == '2'">
+                            <a (click)="onCheckOutChart(transaction)" class="btn btn-primary" >Approve Transaction</a> | <a  class="btn btn-primary">Reject Transaction</a>
+                        </div>
+
+                        <!-- "Cancel Payment" -->
+                        <div *ngIf="transaction.status_trx == '3'">
+                            <p>Transaction Canceled</p>
+                        </div>
+
+                        <!-- "Reject Order" -->
+                        <div *ngIf="transaction.status_trx == '4'">
+                            <p>Transaction Rejected</p>
+                        </div>
+
+                        <!-- "In Delivery" -->
+                        <div *ngIf="transaction.status_trx == '5'">
+                            <p>Transaction In Delivery</p>
+                        </div>
+
+                        <!-- "Complite" -->
+                        <div *ngIf="transaction.status_trx == '6'">
+                            <p>Your Transaction Complited</p>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</div>

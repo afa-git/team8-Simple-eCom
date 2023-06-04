@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
-import { Subject } from 'rxjs';
+import { Subject, throwError } from 'rxjs';
 import { TransactionProduct } from '../models/transaction-product.model';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,31 +11,41 @@ import { TransactionProduct } from '../models/transaction-product.model';
 export class ProductService {
 
   endPointURL:string = 'https://http-v-eleven-default-rtdb.asia-southeast1.firebasedatabase.app/';
-  postURL:string = this.endPointURL+'transaction_product.json';
+  postURL:string = this.endPointURL+'product.json';
 
   errorHandling = new Subject<any>();
   constructor(private http:HttpClient) { }
 
-  //for add to chart product
-  addToChartProduct(transactionProduct : TransactionProduct){
-    console.log("Masuk Service")
-    console.log(transactionProduct)
-    this.http.post<{name : string}>(this.postURL, transactionProduct,{
-      observe:'response'
-    }).subscribe(
-      (data) => {
-        console.log(data)
-        this.errorHandling.next(null)
-      },
-      (error) => {
-        this.errorHandling.next(error)
-      }
-    )
-  }
-
 
   //for get data product
   getProducts(){
-    
+    return this.http.get<{[key:string] :Product}>(this.postURL)
+    .pipe(
+      map( responseData => {
+        const productArray: Product[] = [];
+        for(const key in responseData){
+          if(responseData.hasOwnProperty(key)){
+            productArray.push({...responseData[key],id:key})
+          }
+        }
+        return productArray;
+      }),
+      catchError(
+        errorRes => {
+          return throwError(errorRes)
+        }
+      )
+    )
+
+  }
+
+  
+
+
+  //for add data product
+  postProduct(postData: Product) {
+    // Send Http request
+
+    return this.http.post<{name:string}>(this.postURL, postData);
   }
 }
