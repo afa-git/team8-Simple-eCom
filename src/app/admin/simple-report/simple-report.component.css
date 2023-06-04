@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+  }
+  
+  .formbold-btn {
+    text-align: center;
+    font-size: 12px;
+    border-radius: 0px;
+    padding: 10px 10px;
+    border: none;
+    font-weight: 700;
+    background-color: #058940;
+    color: white;
+    width: 120px;
+    cursor: pointer;
+    margin: 10px 70px 0px 70px;
+  }
+  table, th , td  {
+    border: 1px solid rgb(199, 149, 149);
+    border-collapse: collapse;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align-last: center;
+  }
+ 
+  table tr:nth-child(odd) {
+    background-color: #fbf0f0;
+  }
+  table tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+  th {
+    background-color: aliceblue;
+    color: grey;
+  }
+  
+  #report {
+    width: 595px;
+    height: 842px;
+  }
+ 
