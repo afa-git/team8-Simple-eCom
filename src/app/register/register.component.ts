@@ -37,7 +37,8 @@ export class RegisterComponent implements OnInit {
     const authReqData : AuthRequestData = {
       email:email,
       password:password,
-      returnSecureToken:true
+      returnSecureToken:true,
+      role:"2"
     }
 
     const buyerData : Buyer = {
@@ -58,7 +59,7 @@ export class RegisterComponent implements OnInit {
         const filteredResults = response.filter(item => item.email.toLowerCase().includes(email.toLowerCase()));
         this.searchResults = filteredResults;
         console.log("Result filter",this.searchResults)
-        
+
         if(this.searchResults.length > 0){
           this.errorMessage = "Your email already exist, please use a different email." 
           alert(this.errorMessage)

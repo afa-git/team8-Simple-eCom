@@ -36,7 +36,8 @@ export class AuthComponent implements OnInit {
     const authReqData : AuthRequestData = {
       email:email,
       password:password,
-      returnSecureToken:true
+      returnSecureToken:true,
+      role:''
     }
 
     // for check duplicate account by email
@@ -53,6 +54,8 @@ export class AuthComponent implements OnInit {
 
         if(this.errorMessage == ""){
           console.log("masuk nih")
+          authReqData.role = filteredResults[0].role;
+          
           this.authService.signin(authReqData).subscribe(
               resdata=>{
                 console.log('Berhasil Login')

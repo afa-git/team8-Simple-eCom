@@ -39,7 +39,7 @@ export class TransactionFormComponent implements OnInit {
 
     console.log("val",arrColumnVal)
 
-    this.transactionServ.setTrxProduct(this.dataTransaction.id!,arrColumnKey,arrColumnVal).subscribe(
+    this.transactionServ.setTrxProduct(this.dataTransaction.id!,this.dataTransaction.ref_no,arrColumnKey,arrColumnVal).subscribe(
       (data)=>{
         console.log("data res",data)
         this.transactionServ.updateTransactionProduct(data).subscribe(
@@ -59,6 +59,10 @@ export class TransactionFormComponent implements OnInit {
       }
     )
     
+  }
+
+  updateStatus(statusTrx:string){
+
   }
 
 }

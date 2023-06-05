@@ -5,6 +5,7 @@ import { User } from '../models/user.model';
 import { TransactionProduct } from '../models/transaction-product.model';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-transactions',
@@ -13,7 +14,7 @@ import { throwError } from 'rxjs';
 })
 export class TransactionsComponent implements OnInit {
 
-  constructor(private authServ: AuthService, private transactionServ:TransactionProductService) { }
+  constructor(private authServ: AuthService, private transactionServ:TransactionProductService, private productServ:ProductService) { }
 
   userSubject:User = null!
   dataTransactions:TransactionProduct[] = [];
@@ -41,17 +42,46 @@ export class TransactionsComponent implements OnInit {
     }
   }
 
-  onCheckOutChart(dataIn:TransactionProduct){
+  onUpdateStatus(dataIn:TransactionProduct,statusTrx:string){
 
     let dataUpdate:any = null!
-
-    let arrColumnKey = ['date_modified','status_trx']
-    let arrColumnVal = { 
-      date_modified: new Date(),
-      status_trx: '1'
+    let arrColumnKey:any = [];
+    let arrColumnVal:any = {};
+    // 2
+    if(statusTrx == '2'){
+      arrColumnKey = ['date_modified','status_trx']
+      arrColumnVal = { 
+        date_modified: new Date(),
+        status_trx: statusTrx
+      }
+    }else if(statusTrx == '4'){ //4
+      arrColumnKey = ['date_modified','status_trx']
+      arrColumnVal = { 
+        date_modified: new Date(),
+        status_trx: statusTrx
+      }
+    }else if(statusTrx == '5'){ //5
+      arrColumnKey = ['date_modified','status_trx']
+      arrColumnVal = { 
+        date_modified: new Date(),
+        status_trx: statusTrx
+      }
+    }else if(statusTrx == '6'){ //6
+      arrColumnKey = ['date_modified','status_trx',]
+      arrColumnVal = { 
+        date_modified: new Date(),
+        status_trx: statusTrx
+      }
     }
+    
+    //5
 
-    this.transactionServ.setTrxProduct(dataIn.id!,arrColumnKey,arrColumnVal).subscribe(
+    //6
+
+    
+   
+
+    this.transactionServ.setTrxProduct(dataIn.id!,dataIn.ref_no,arrColumnKey,arrColumnVal).subscribe(
       (data)=>{
 
         console.log("data res",data)
@@ -59,6 +89,26 @@ export class TransactionsComponent implements OnInit {
             (response)=>{
               console.log("update response",response)
               alert("success")
+
+              // Update Stock Product
+              if(statusTrx == '5'){
+                this.productServ.setProduct(dataIn.product_id,arrColumnKey,arrColumnVal).subscribe(
+                    (dataProduct)=>{
+                      this.productServ.updateProduct(dataProduct).subscribe(
+                        (response2)=>{
+                          console.log("Update Product Success")
+                        },
+                        (error)=>{
+                          console.log(error)
+                        }
+                      )
+                    },
+                    (erorrProducy)=>{
+
+                    }
+                )
+              }
+
               this.getTransaction()
             },
             (error)=>{

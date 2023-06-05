@@ -65,8 +65,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
                  item.email.includes(this.userSubject.value.email) && (
                  item.status_trx.includes("0") || 
                  item.status_trx.includes("1") || 
-                 item.status_trx.includes("2") || 
-                 item.status_trx.includes("5") )
+                 item.status_trx.includes("2") )
                  ).length;
         },
         (error)=>{

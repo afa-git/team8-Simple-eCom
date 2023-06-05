@@ -57,19 +57,27 @@ export class TransactionProductService {
   arrColumnVal = {'date_modified':'12-JAN-2023','status_trx':'1'}
   
   */ 
-  setTrxProduct(idTrx:string,arrColumnKey:any,arrColumnVal:any){
+  setTrxProduct(idTrx:string,refNo:string,arrColumnKey:any,arrColumnVal:any){
     return this.http.get<{[key:string] :TransactionProduct}>(this.postURL).pipe(
       map( responseData => {
+       
+        
         const productArray: TransactionProduct[] = [];
+
+
+
         for(const key in responseData){
           if(responseData.hasOwnProperty(key)){
             productArray.push({...responseData[key]})
           }
         }
+        const resultResponse = productArray.filter(item => item.ref_no.toLowerCase().includes(refNo.toLowerCase()));
+
+        console.log("data",resultResponse)
 
         let dataUpdate:any = null!
 
-        productArray.map( responseData2 => {
+        resultResponse.map( responseData2 => {
           let trxArray: any = {};
           let dataRes:any = responseData2
           for(const key in dataRes){

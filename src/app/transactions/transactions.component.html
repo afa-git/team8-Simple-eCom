@@ -17,20 +17,19 @@
                         <p class="card-text">{{ transaction.description }}</p>
                         
                         <!-- Status in chart -->
-                        <div *ngIf="transaction.status_trx == '0'">
+                        <div *ngIf="transaction.status_trx == '0' && userSubject.role == '2'">
                             <app-transaction-form [dataTransaction]="transaction"></app-transaction-form>
-                            <a (click)="onCheckOutChart(transaction)" class="btn btn-primary" >Checkout Now</a> | <a  class="btn btn-primary">Reject</a>
                         </div>
 
                         <!-- "Pending Payment" -->
-                        <div *ngIf="transaction.status_trx == '1'">
+                        <div *ngIf="transaction.status_trx == '1' && userSubject.role == '2' ">
                             
-                            <a (click)="onCheckOutChart(transaction)" class="btn btn-success" >I Already Paid</a>
+                            <a (click)="onUpdateStatus(transaction,'2')" class="btn btn-success" >I Already Paid</a>
                         </div>
 
                         <!-- "Pending Approve" -->
-                        <div *ngIf="transaction.status_trx == '2'">
-                            <a (click)="onCheckOutChart(transaction)" class="btn btn-primary" >Approve Transaction</a> | <a  class="btn btn-primary">Reject Transaction</a>
+                        <div *ngIf="transaction.status_trx == '2' && userSubject.role == '1'">
+                            <a (click)="onUpdateStatus(transaction,'5')" class="btn btn-primary" >Approve Transaction</a> | <a  (click)="onUpdateStatus(transaction,'4')" class="btn btn-primary">Reject Transaction</a>
                         </div>
 
                         <!-- "Cancel Payment" -->
@@ -44,8 +43,8 @@
                         </div>
 
                         <!-- "In Delivery" -->
-                        <div *ngIf="transaction.status_trx == '5'">
-                            <p>Transaction In Delivery</p>
+                        <div *ngIf="transaction.status_trx == '5' && userSubject.role == '1'">
+                            <a (click)="onUpdateStatus(transaction,'6')" class="btn btn-primary" >Delivery Transaction</a>
                         </div>
 
                         <!-- "Complite" -->

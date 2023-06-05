@@ -28,7 +28,7 @@ export class ProductPipe implements PipeTransform {
         case  "5":
           result = "In Delivery"
           break;
-        case  "5":
+        case  "6":
           result = "Complite"
         break;
         default:
