@@ -1,20 +1,20 @@
 <app-header-admin></app-header-admin>
 <div class="container">
     <div class="row">
-        <!-- <div class="col-3">
-            <h2>Welcome Admin, </h2><br> 
-            <h4>Have a nice day ^^</h4>
-            <p>Success isn't always about greatness. It;s about consistency. Consistent <br> hard work gains
-                success. Greatness will come.</p>
-                <img src="../../assets/images/image1.png">
-        </div>  -->
+        <div class="col-6" >
+          <h3 style="margin: 20px 50px 0px;color: brown">List Products</h3>
+
+          <div class="list-group" *ngFor="let product of dataProducts">
+            <a class="list-group-item list-group-item-action">{{ product.name }}</a>
+          </div>
+        </div>
         
-        <div class="col-2">
-            <!-- <h3 style="margin: 20px 50px 0px;color: brown">Add New Products</h3> -->
+        <div class="col-6">
+            <h3 style="margin: 20px 50px 0px;color: brown">Add New Products</h3>
             <div class="formbold-main-wrapper">
                 <div class="formbold-form-wrapper">
                     <!-- <form > -->
-                  <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm.value)">
+                  <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm)">
                     <div class="formbold-mb-5">
                         <label for="trx_id" class="formbold-form-label"> Transaction ID </label>
                         <input
@@ -68,23 +68,50 @@
                       />
                     </div>
                     <div class="formbold-mb-5">
-                        <label for="image_url" class="formbold-form-label"> Image URL </label>
+                        <label for="img_url_1" class="formbold-form-label">Image URL</label>
                         <input
                           type="text"
-                          name="image_url"
-                          id="image_url"
-                          placeholder="Image URL"
+                          id="img_url_1"
+                          placeholder="Small Image URL 1"
                           class="formbold-form-input"
                           required
                           ngModel
-                          name="image_url"
+                          name="img_url_1"
+                        />
+                        <input
+                          type="text"
+                          id="img_url_2"
+                          placeholder="Small Image URL 2"
+                          class="formbold-form-input"
+                          required
+                          ngModel
+                          name="img_url_2"
+                        />
+                        
+                        <input
+                          type="text"
+                          id="img_url_3"
+                          placeholder="Small Image URL 3"
+                          class="formbold-form-input"
+                          required
+                          ngModel
+                          name="img_url_3"
+                        />
+
+                        <input
+                          type="text"
+                          id="img_url_4"
+                          placeholder="Small Image URL 4"
+                          class="formbold-form-input"
+                          required
+                          ngModel
+                          name="img_url_4"
                         />
                     </div>
-                    
                     <div class="formbold-mb-5">
-                    <label for="category" class="formbold-form-label"> Category </label>
-                    <select id="category" name="category">
-                        <option value="shoes">Shoes</option>
+                    <label for="stocks" class="formbold-form-label"> Category </label>
+                    <select id="category" name="category" ngModel class="formbold-form-input" >
+                        <option value="shoes" >Shoes</option>
                         <option value="t-shirt">T-Shirt</option>
                         <option value="pants">Pants</option>
                         <option value="bag">Bag</option>
@@ -107,10 +134,10 @@
                     <div>
                       <!-- <button class="formbold-btn">Add New Product</button> -->
                     <button
-                    class="formbold-btn"
+                    class="btn btn-primary"
                     type="submit"
                     [disabled]="!postForm.valid"
-                  >
+                    >
                     Add New Product
                   </button>
                     </div>

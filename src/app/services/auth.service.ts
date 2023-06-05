@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 export interface AuthRequestData{
   email:string,
   password:string,
-  returnSecureToken:boolean
+  returnSecureToken:boolean,
+  role:string
 }
 
 export interface AuthResponseData{
@@ -18,7 +19,8 @@ export interface AuthResponseData{
   email:string,
   refreshToken:string,
   expiresIn:string,
-  localId:string
+  localId:string,
+  role:string
 }
 
 
@@ -30,12 +32,14 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private router:Router) { }
   
   userSubject = new BehaviorSubject<User>(null!);
-  tokenExpirationTimer = null;
+  tokenExpirationTimer:any;
 
-  private handleAuthentication(email:string,localId:string,token:string,expiresIn:number){
+  private handleAuthentication(email:string,localId:string,token:string,expiresIn:number,role:string){
+    console.log("dalam role",role)
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-    const user = new User(email,localId,token,expirationDate);
+    const user = new User(email,localId,token,expirationDate,role);
     this.userSubject.next(user);
+    this.autoLogout(expiresIn *1000)
     localStorage.setItem('userData',JSON.stringify(user))
   }
 
@@ -44,18 +48,20 @@ export class AuthService {
       email:authRequestData.email,
       password:authRequestData.password,
       returnSecureToken: authRequestData.returnSecureToken
-    })
+    }).pipe(catchError(this.handleError))
   }
 
   signin(authRequestData: AuthRequestData){
+    console.log("role",authRequestData)
     return this.httpClient.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDbtOA5M-4tFbFa_TWjXgO72J0Q1efm9k8',{
       email:authRequestData.email,
       password:authRequestData.password,
-      returnSecureToken: authRequestData.returnSecureToken
+      returnSecureToken: authRequestData.returnSecureToken,
+      role:authRequestData.role
     }).pipe(
       catchError(this.handleError)
       ,tap(respData => {
-        this.handleAuthentication(respData.email, respData.localId, respData.idToken, +respData.expiresIn)
+        this.handleAuthentication(respData.email, respData.localId, respData.idToken, +respData.expiresIn,authRequestData.role)
       })
     )
   }
@@ -66,14 +72,16 @@ export class AuthService {
       id:string,
       _token:string,
       _tokenExpirationDate:string,
+      role:string
     } = JSON.parse(localStorage.getItem('userData')!)
 
+    console.log("data",userData)
     if(!userData){
       return;
     }
 
-    const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
-
+    const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate),userData.role);
+    console.log("loadedUser",loadedUser.token)
     if(loadedUser.token){
       this.userSubject.next(loadedUser);
 
@@ -91,9 +99,9 @@ export class AuthService {
   }
   
   autoLogout(expirationDuration: number){
-    // this.tokenExpirationTimer = setTimeout (() => {
-    //   this.logout()
-    // }, expirationDuration)
+    this.tokenExpirationTimer = setTimeout (() => {
+      this.logout()
+    }, expirationDuration)
   }
 
 

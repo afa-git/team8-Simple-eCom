@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthRequestData, AuthService } from '../services/auth.service';
+import { BuyerService } from '../services/buyer.service';
 
 @Component({
   selector: 'app-auth',
@@ -9,8 +10,15 @@ import { AuthRequestData, AuthService } from '../services/auth.service';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-  constructor(private router:Router,private authService:AuthService) { }
+  constructor(
+    private router:Router,
+    private authService:AuthService,
+    private activatedRouter: ActivatedRoute,
+    private buyerService:BuyerService
+    ) { }
 
+  searchResults: any[] = [];
+  errorMessage: string = "";
   ngOnInit(): void {
     
   }
@@ -28,24 +36,49 @@ export class AuthComponent implements OnInit {
     const authReqData : AuthRequestData = {
       email:email,
       password:password,
-      returnSecureToken:true
+      returnSecureToken:true,
+      role:''
     }
 
-    this.authService.signin(authReqData).subscribe(
-        resdata=>{
-          console.log('Berhasil Login')
-          console.log(resdata)
-        },
-        error =>{
-          console.log(error)
+    // for check duplicate account by email
+    this.buyerService.getBuyer().subscribe(
+      (response) => {
+        console.log("Result respon",response)
+        const filteredResults = response.filter(item => item.email.toLowerCase().includes(email.toLowerCase()));
+        this.searchResults = filteredResults;
+        console.log("Result filter",this.searchResults)
+        if(this.searchResults.length != 1){
+          this.errorMessage = "Your account is not regitered" 
+          alert(this.errorMessage)
         }
-    )
 
-    authForm.reset();
+        if(this.errorMessage == ""){
+          console.log("masuk nih")
+          authReqData.role = filteredResults[0].role;
+          
+          this.authService.signin(authReqData).subscribe(
+              resdata=>{
+                console.log('Berhasil Login')
+                authForm.reset();
+                this.router.navigate(['/'])
+              },
+              error =>{
+                console.log(error)
+              }
+          )
+        }
+      },
+      (error) => {
+        console.log(error);
+        this.errorMessage = error;
+      }
+    );
+
+    
   }
 
   onRegister(){
-    this.router.navigate(['/register'])
+    this.router.navigate(['/register'],{relativeTo:this.activatedRouter})
   }
 
 

@@ -21,12 +21,16 @@ import { DashboardAdminComponent } from './admin/dashboard-admin/dashboard-admin
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { SimpleReportComponent } from './admin/simple-report-product/simple-report.component';
 import { SimpleReportUserComponent } from './admin/simple-report-user/simple-report-user.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { ProductPipe } from './pipe/product.pipe';
+import { TransactionFormComponent } from './transactions/transaction-form/transaction-form.component';
 
 const appRoutes: Routes = [
   {path: '', component:DashboardComponent},
   {path: 'dashboard',component:DashboardComponent},
   {path: 'products', component:ProductsComponent},
   {path: 'products/:id', component:ProductDetailComponent},
+  {path: 'productadd', component:ProductAddComponent},
   {path: 'auth', component:AuthComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'productadd', component:ProductAddComponent},
@@ -34,7 +38,8 @@ const appRoutes: Routes = [
   {path: 'admin', component:DashboardAdminComponent},
   {path: 'users', component:UserManagementComponent},
   {path: 'reportproducts', component:SimpleReportComponent},
-  {path: 'reportusers', component:SimpleReportUserComponent}
+  {path: 'reportusers', component:SimpleReportUserComponent},
+  {path: 'transactions', component:TransactionsComponent},
 ];
 
 @NgModule({
@@ -55,7 +60,10 @@ const appRoutes: Routes = [
     DashboardAdminComponent,
     UserManagementComponent,
     SimpleReportComponent,
-    SimpleReportUserComponent
+    SimpleReportUserComponent,
+    TransactionsComponent,
+    ProductPipe,
+    TransactionFormComponent
   ],
   imports: [
     BrowserModule,
