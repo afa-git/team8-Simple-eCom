@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
 import { Subject, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { TransactionProduct } from '../models/transaction-product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,22 @@ export class ProductService {
   errorHandling = new Subject<any>();
   constructor(private http:HttpClient) { }
 
-
+//for add to chart product
+addToChartProduct(transactionProduct : TransactionProduct){
+  console.log("Masuk Service")
+  console.log(transactionProduct)
+  this.http.post<{name : string}>(this.postURL, transactionProduct,{
+    observe:'response'
+  }).subscribe(
+    (data) => {
+      console.log(data)
+      this.errorHandling.next(null)
+    },
+    (error) => {
+      this.errorHandling.next(error)
+    }
+  )
+}
   //for get data product
   getProducts(){
     return this.http.get<{[key:string] :Product}>(this.postURL)
@@ -37,9 +53,6 @@ export class ProductService {
     )
 
   }
-
-  
-
 
   //for add data product
   postProduct(postData: Product) {
@@ -105,9 +118,5 @@ export class ProductService {
   updateProduct(dataProduct:any){
     return this.http.patch(this.postURL, dataProduct);
   }
-
-
-
-
 
 }
