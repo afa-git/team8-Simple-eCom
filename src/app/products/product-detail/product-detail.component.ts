@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { HeaderComponent } from 'src/app/header/header.component';
 import { Buyer } from 'src/app/models/buyer.model';
 import { Product } from 'src/app/models/product.model';
 import { TransactionProduct } from 'src/app/models/transaction-product.model';
@@ -21,7 +20,7 @@ export class ProductDetailComponent implements OnInit {
   img_url:any[] = [];
   dataBuyer: Buyer = new Buyer("","","","","","",new Date());
 
-  constructor(private transactionProductServe:TransactionProductService, private productServ:ProductService, private activatedRoute:ActivatedRoute, private buyerServe:BuyerService, private headerComp:HeaderComponent) {
+  constructor(private transactionProductServe:TransactionProductService, private productServ:ProductService, private activatedRoute:ActivatedRoute, private buyerServe:BuyerService) {
    }
   ngOnInit(): void {
     this.getProductByTrxId(this.activatedRoute.snapshot.params.id);

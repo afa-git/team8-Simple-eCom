@@ -17,6 +17,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { ProductPipe } from './pipe/product.pipe';
 import { TransactionFormComponent } from './transactions/transaction-form/transaction-form.component';
+import { AuthGuard } from './guard/auth.guard';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
   {path: '', component:DashboardComponent},
@@ -26,7 +28,13 @@ const appRoutes: Routes = [
   {path: 'productadd', component:ProductAddComponent},
   {path: 'auth', component:AuthComponent},
   {path: 'register', component:RegisterComponent},
-  {path: 'transactions', component:TransactionsComponent},
+  {
+    canActivate:[AuthGuard],
+    path: 'transactions', component:TransactionsComponent
+  },
+  {path: 'register', component:RegisterComponent},
+  {path: 'not-found',component:PageNotFoundComponent},
+  {path: '**',redirectTo:'/not-found'}
 ];
 
 @NgModule({
@@ -43,7 +51,8 @@ const appRoutes: Routes = [
     AuthComponent,
     TransactionsComponent,
     ProductPipe,
-    TransactionFormComponent
+    TransactionFormComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

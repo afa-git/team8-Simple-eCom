@@ -7,13 +7,14 @@
             <nav>
                 <ul id="MenuItems">
                     <li><a [routerLink]="['dashboard']">Home</a></li>
-                    <li><a [routerLink]="['products']">Products</a></li>
-                    <li><a href="">About</a></li>
+                    <li><a [routerLink]="['products']" >Products</a></li>
+                    <li><a [routerLink]="['report']" *ngIf="role == '1' ">Report</a></li>
+                    <li><a [routerLink]="['transactions']" *ngIf="role == '1' ">Transaction</a></li>
                     <li><a [routerLink]="['auth']" *ngIf="!isAuthenticated">Sign In</a></li>
                     <li><a (click)="onLogout()"  *ngIf="isAuthenticated" >Logout</a></li>
                 </ul>
             </nav>
-            <a [routerLink]="['transactions']" class="position-relative"><img src="../../assets/images/cart.png" width="30px" height="30px" *ngIf="isAuthenticated"><span *ngIf="countActiveTrx > 0 " class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            <a [routerLink]="['transactions']" class="position-relative"><img src="../../assets/images/cart.png" width="30px" height="30px" *ngIf="isAuthenticated && role =='2'"  ><span *ngIf="countActiveTrx > 0 " class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                 {{ countActiveTrx }}
                 <span class="visually-hidden">unread messages</span>
               </span></a>
