@@ -8,6 +8,11 @@
                 <ul id="MenuItems">
                     <li><a [routerLink]="['dashboard']">Home</a></li>
                     <li><a [routerLink]="['products']">Products</a></li>
+                    <li><a [routerLink]="['productadd']">Add Products</a></li>
+                    <li><a [routerLink]="['productedit']">View List/Edit Products</a></li>
+                    <li><a [routerLink]="['users']">Manage User</a></li>
+                    <li><a [routerLink]="['reportproducts']">Report Products</a></li>
+                    <li><a [routerLink]="['reportusers']">Report User</a></li>
                     <li><a href="">About</a></li>
                     <li><a [routerLink]="['auth']" *ngIf="!isAuthenticated">Sign In</a></li>
                     <li><a (click)="onLogout()"  *ngIf="isAuthenticated" >Logout</a></li>

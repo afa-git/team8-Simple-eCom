@@ -36,6 +36,19 @@ export class BuyerService {
   postBuyer(buyerData: Buyer) {
     return this.http.post<{name:string}>(this.buyerURL, buyerData);
   }
+
+  deletePosts(id:string) {
+    let url =this.endPointURL+'buyer/'+id+'.json';
+    console.log('afa url ' +url);
+ 
+    this.http.delete(url).subscribe(
+      (id) => {
+        console.log(id);
+        alert("Hapus Data User Berhasil -_-");
+        return;
+      }
+    );
+  }
 }
 
 

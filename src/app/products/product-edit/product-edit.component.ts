@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ProductAdminService } from '../../services/product-admin.service';
-import { Product } from 'src/app/models/ecomm.module';
+import { Product } from 'src/app/models/product.model';
+import { ProductService } from 'src/app/services/product.service';
 import { Subscription } from 'rxjs';
-// import { url } from 'inspector';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-product-edit',
@@ -15,12 +15,15 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   loadedPosts : any []= [];
   showLoading = false;
 
-  constructor(private productService: ProductAdminService) { }
+  constructor(private productService: ProductService) { }
 
   id:string = '';
   trx_id:string = '';
-  title:string='';
-  image_url:string='';
+  name:string='';
+  img_url_1:string='';
+  img_url_2:string='';
+  img_url_3:string='';
+  img_url_4:string='';
   category:string='';
   amount:string='';
   description:string='';
@@ -40,7 +43,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   public fetchPosts(){
 
     this.showLoading = true;
-    this.productService.fetchPosts()
+    this.productService.getProducts()
     .subscribe(
       posts => {
         this.showLoading = false;
@@ -53,24 +56,63 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     )
   }
 
-  onUpdatePost(updateData:Product) {
-    this.productService.onUpdatePost(updateData);
+  onClickData(postData:any){
+
+    const img:any = [];
+    img.push(postData.img_url_1);
+    img.push(postData.img_url_2);
+    img.push(postData.img_url_3);
+    img.push(postData.img_url_4);
+
+    this.trx_id = postData.trx_id;
+    this.amount = postData.amount;
+    this.name = postData.name;
+    this.stocks = postData.stocks;
+    this.description = postData.description;
+    this.img_url_1 = postData.image_url[0];
+    this.img_url_2 = postData.image_url[1];
+    this.img_url_3 = postData.image_url[2];
+    this.img_url_4 = postData.image_url[3];
+    this.category = postData.category;
+    this.id = postData.id;
   }
 
-  onClickData(updateData:Product){
-    this.trx_id = updateData.trx_id;
-    this.amount = updateData.amount;
-    this.title = updateData.title;
-    this.stocks = updateData.stocks;
-    this.description = updateData.description;
-    this.image_url = updateData.image_url;
-    this.category = updateData.category;
-    this.id = updateData.id;
+  onUpdatePost(postData:NgForm) {
+    if(!postData.valid)
+      return
+      
+    console.log("postData",postData)
+
+    const img:any = [];
+    img.push(postData.value.img_url_1);
+    img.push(postData.value.img_url_2);
+    img.push(postData.value.img_url_3);
+    img.push(postData.value.img_url_4);
+
+    const dataProduct:Product = {
+        id:postData.value.id,
+        trx_id:postData.value.trx_id,
+        name:postData.value.name,
+        amount:postData.value.amount,
+        stocks:postData.value.stocks,
+        image_url:img,
+        description:postData.value.description,
+        category:postData.value.category
+    }
+    console.log("dataProduct",dataProduct)
+
+    this.productService.onUpdatePost(dataProduct);
+
   }
 
-  onClearPosts(deleteData:Product) {
-    // Send Http request
-    this.productService.deletePosts(deleteData);    
+  onClearPosts(postData:NgForm) {
+    if(!postData.valid)
+      return
+
+    let id:any = postData.value.id;
+    console.log("dataProduct",id)
+
+    this.productService.deletePosts(id);
   }
 
   ngOnDestroy(): void {

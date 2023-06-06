@@ -1,217 +1,45 @@
-<app-header-admin></app-header-admin>
-
-<!-- <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm.value)">
-    <div class="formbold-mb-5">
-        <label for="user_id" class="formbold-form-label"> User ID </label>
-        <input
-          type="text"
-          name="user_id"
-          id="user_id"
-          class="formbold-form-input"
-          required
-          ngModel
-          name="user_id"
-        />
-      </div>
-    <div class="formbold-mb-5">
-      <label for="user_name" class="formbold-form-label"> User Name</label>
-      <input
-        type="text"
-        name="user_name"
-        id="user_name"
-        class="formbold-form-input"
-        required
-        ngModel
-        name="user_name"
-      />
-    </div>
-    <div class="formbold-mb-5">
-      <label for="role" class="formbold-form-label"> Role </label>
-      <input
-        type="text"
-        name="role"
-        id="role"
-        class="formbold-form-input"
-        required
-        ngModel
-        name="role"
-      />
-    </div>
-    <div class="formbold-mb-5">
-      <label for="enable" class="formbold-form-label"> Enable </label>
-      <input
-        type="text"
-        name="enable"
-        id="enable"
-        class="formbold-form-input"
-        required
-        ngModel
-        name="enable"
-      />
-    </div>
-    <div class="formbold-mb-5">
-        <label for="locked" class="formbold-form-label"> Locked </label>
-        <input
-          type="text"
-          name="locked"
-          id="locked"
-          class="formbold-form-input"
-          required
-          ngModel
-          name="locked"
-        />
-    </div>
-    
-    <button
-    class="formbold-btn"
-    type="submit"
-    [disabled]="!postForm.valid"
-  >
-    Add New User
-  </button>
-    
-  
-</form> -->
-
 <div class="container">
   <div class="row">
-    <div class="small-container">
-        <br>
       <h2 class="title">Manage User</h2>
       <br>
-    <span class="sr-only" *ngIf="showLoading && !error">Loading... </span>
+      <span class="sr-only" *ngIf="showLoading && !error">Loading... </span>
       <p *ngIf="loadedPosts.length < 1 && !showLoading">No posts available!</p>
       <div class="row">
         <table style="width: 70%;" >
             <tr class="header" *ngIf="loadedPosts.length >= 1">        
                 <th style="width:5%; font-weight: bold">No</th>    
                 <th style="width:20%; font-weight: bold">ID</th>
-                <th style="width:10%; font-weight: bold">User Id</th>
-                <th style="width:15%; font-weight: bold">User Name</th>
-                <th style="width:10%; font-weight: bold">Role</th>
-                <th style="width:5%; font-weight: bold">Enable</th>
-                <th style="width:5%; font-weight: bold">Locked</th>
+                <th style="width:10%; font-weight: bold">User Name</th>
+                <th style="width:15%; font-weight: bold">Address</th>
+                <th style="width:20%; font-weight: bold">Date Modified</th>
+                <th style="width:5%; font-weight: bold">No HP</th>
+                <th style="width:5%; font-weight: bold">Role</th>
                 <th style="width:10%; font-weight: bold">Action</th>
               </tr>
           <tr *ngFor="let post of loadedPosts; let i= index">        
             <th style="font-weight: bold">{{i + 1}}</th>   
             <th>{{post.id | shorten}}</th> 
-            <th>{{post.user_id}}</th>
-            <th>{{post.user_name}}</th>
-            <th>{{post.role}}</th>
-            <th>{{post.enable}}</th>
-            <th>{{post.locked}}</th>
-            <th style="color: rgb(15, 128, 25);" (click)="onClickData(post)">Edit</th>
+            <th>{{post.name}}</th>
+            <th>{{post.address | shorten}}</th>
+            <th>{{post.date_modified | shorten}}</th>
+            <th>{{post.no_hp}}</th>
+            <th *ngIf="post.role == '1'">
+              Seller
+            </th>
+            <th *ngIf="post.role == '2'">
+              Buyer
+            </th>
+            <th>
+              <button
+                    class="formbold-btn-danger"
+                    (click)="onClearUser(post.id)"
+                  >
+                    Delete
+                  </button>
+              </th>
           </tr>
         </table>
       </div>
   </div>
-  </div>
-    
 </div>
-<div>
-    <br>
-</div>
-<div class="row">
-              <form #updateForm="ngForm" (ngSubmit)="onUpdatePost(updateForm.value)">
-                <table style="width: 70%;">
-                    <tr class="header">
-                        <td><label for="id" class="formbold-form-label">ID</label></td>
-                        <td><label for="user_id" class="formbold-form-label"> User ID </label></td>
-                        <td><label for="user_name" class="formbold-form-label"> User Name</label></td>
-                        <td><label for="role" class="formbold-form-label"> Role</label></td>
-                        <td><label for="enable" class="formbold-form-label"> Enable </label></td>
-                        <td><label for="locked" class="formbold-form-label"> Locked </label></td>
-                        <td><label for="action" class="formbold-form-label"> Action </label></td>
-                    </tr>
-                <tr class="formbold-mb-5">
-                    <td>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="id"
-                      class="formbold-form-input"
-                      required
-                      ngModel
-                      name="id"
-                      [ngModel]="id"
-                      [readonly] = "true"
-                    />
-                    </td>
-                    <td>
-                        <input
-                      type="text"
-                      name="user_id"
-                      id="user_id"
-                      class="formbold-form-input"
-                      required
-                      ngModel
-                      name="user_id"
-                      [ngModel]="user_id"
-                      [readonly] = "true"
-                    />
-                    </td>
-                    <td>
-                        <input
-                        type="text"
-                        name="user_name"
-                        id="user_name"
-                        class="formbold-form-input"
-                        required
-                        ngModel
-                        name="user_name"
-                        [ngModel]="user_name"
-                        [readonly] = "true"
-                      />
-                    </td>
-                    <td>
-                        <input
-                    type="text"
-                    name="role"
-                    id="role"
-                    class="formbold-form-input"
-                    required
-                    ngModel
-                    name="role"
-                    [ngModel]="role"
-                    [readonly] = "true"
-                  />
-                    </td>
-                    <td>
-                        <input
-                    type="text"
-                    name="enable"
-                    id="enable"
-                    class="formbold-form-input"
-                    required
-                    ngModel
-                    name="enable"
-                    [ngModel]="enable"
-                  />
-                    </td>
-                    <td>
-                        <input
-                      type="text"
-                      name="locked"
-                      id="locked"
-                      class="formbold-form-input"
-                      required
-                      ngModel
-                      name="locked"
-                      [ngModel]="locked"
-                    />
-                    </td>
-                    <td>
-                        <button
-                  class="formbold-btn"
-                  type="submit"
-                  [disabled]="!updateForm.valid"
-                >
-                Edit User
-              </button>  
-                    </td>
-                </tr>
-                </table>
-            </form>
-           
-</div>
+ 

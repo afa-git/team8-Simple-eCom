@@ -16,7 +16,6 @@ import { ProductAddComponent } from './products/product-add/product-add.componen
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductEditComponent} from './products/product-edit/product-edit.component'
 import { ShortenPipe } from './shorten.pipe';
-import { HeaderAdminComponent } from './admin/header-admin/header-admin.component';
 import { DashboardAdminComponent } from './admin/dashboard-admin/dashboard-admin.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { SimpleReportComponent } from './admin/simple-report-product/simple-report.component';
@@ -24,6 +23,7 @@ import { SimpleReportUserComponent } from './admin/simple-report-user/simple-rep
 import { TransactionsComponent } from './transactions/transactions.component';
 import { ProductPipe } from './pipe/product.pipe';
 import { TransactionFormComponent } from './transactions/transaction-form/transaction-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
   {path: '', component:DashboardComponent},
@@ -56,7 +56,6 @@ const appRoutes: Routes = [
     AuthComponent,
     ProductEditComponent,
     ShortenPipe,
-    HeaderAdminComponent,
     DashboardAdminComponent,
     UserManagementComponent,
     SimpleReportComponent,
@@ -71,7 +70,8 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

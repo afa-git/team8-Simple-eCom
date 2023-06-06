@@ -1,16 +1,6 @@
-<app-header-admin></app-header-admin>
 <div class="container">
     <div class="row">
-        <div class="col-6" >
-          <h3 style="margin: 20px 50px 0px;color: brown">List Products</h3>
-
-          <div class="list-group" *ngFor="let product of dataProducts">
-            <a class="list-group-item list-group-item-action">{{ product.name }}</a>
-          </div>
-        </div>
-        
         <div class="col-6">
-            <h3 style="margin: 20px 50px 0px;color: brown">Add New Products</h3>
             <div class="formbold-main-wrapper">
                 <div class="formbold-form-wrapper">
                     <!-- <form > -->
@@ -132,9 +122,8 @@
                         />
                         </div>
                     <div>
-                      <!-- <button class="formbold-btn">Add New Product</button> -->
                     <button
-                    class="btn btn-primary"
+                    class="formbold-btn"
                     type="submit"
                     [disabled]="!postForm.valid"
                     >
