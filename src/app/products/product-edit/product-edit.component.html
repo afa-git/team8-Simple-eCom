@@ -1,27 +1,26 @@
-<div class="container">
-  <div class="row">
-    <div class="small-container">
-      <h2 class="title">List Products</h2>
-      <br>
+<h2 class="title">List Products</h2>
+    <br>
       <div class="spinner-border" style="width: 6rem; height: 6rem;"
         role="status" *ngIf="showLoading && !error">
-    </div>
+      </div>
     <span class="sr-only" *ngIf="showLoading && !error">Loading... </span>
       <p *ngIf="loadedPosts.length < 1 && !showLoading">No posts available!</p>
-      <div class="row">
-        <table>
-          <tr class="header" *ngIf="loadedPosts.length >= 1">        
-            <td style="width:5%; font-weight: bold">No</td>  
-            <td style="width:20%; font-weight: bold">ID</td>  
-            <td style="width:10%; font-weight: bold">Trx ID</td>
-            <td style="width:10%; font-weight: bold">Name</td>
-            <td style="width:10%; font-weight: bold">Amount</td>
-            <td style="width:5%; font-weight: bold">Stocks</td>
-            <td style="width:20%; font-weight: bold">Image URL</td>
-            <td style="width:10%; font-weight: bold">Category</td>
-            <td style="width:20%; font-weight: bold">Description</td>
-            <td style="width:10%; font-weight: bold">Action</td>
-          </tr>
+        <table class="table" style="width: 60%;">
+          <thead>
+            <tr class="header" *ngIf="loadedPosts.length >= 1">        
+              <td style="width:5%; font-weight: bold">No</td>  
+              <td style="width:20%; font-weight: bold">ID</td>  
+              <td style="width:10%; font-weight: bold">Trx ID</td>
+              <td style="width:10%; font-weight: bold">Name</td>
+              <td style="width:10%; font-weight: bold">Amount</td>
+              <td style="width:5%; font-weight: bold">Stocks</td>
+              <td style="width:20%; font-weight: bold">Image URL</td>
+              <td style="width:10%; font-weight: bold">Category</td>
+              <td style="width:20%; font-weight: bold">Description</td>
+              <td style="width:10%; font-weight: bold">Action</td>
+            </tr>
+          </thead>
+          <tbody>
           <tr *ngFor="let post of loadedPosts; let i= index">        
             <td style="width:5%; font-weight: bold">{{i + 1}}</td>    
             <td style="width:20%; font-weight: bold; color: rgb(143, 94, 94);">{{post.id | shorten}}</td>
@@ -39,12 +38,20 @@
             </td>
             <td style="width:10%">{{post.category}}</td>
             <td style="width:20%">{{post.description | shorten}}</td>
-            <td style="width:10% ; font-weight: bold; color: rgb(153 46 46);" (click)="onClickData(post)">Edit</td>
+            <td>
+              <button
+                        class="formbold-btn-edit"
+                        (click)="onClickData(post)"
+                      >
+                      Edit
+                      </button>
+                      </td>
           </tr>
+        </tbody>
         </table>
-      </div>
-  </div>
-  </div>
+        <br>
+        <h2 class="title"> </h2>
+        
     <div class="row">
         <div class="col-2">
             <div class="formbold-main-wrapper">
@@ -210,4 +217,3 @@
               </div>
         </div>
     </div>
-</div>

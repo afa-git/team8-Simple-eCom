@@ -106,23 +106,27 @@
     }
   }
   table, th , td  {
-    border: 1px solid rgb(199, 149, 149);
     border-collapse: collapse;
     padding: 5px;
     margin-left: auto;
     margin-right: auto;
-    text-align-last: center;
+    font-size: 12px;
   }
  
   table tr:nth-child(odd) {
-    background-color: #fbf0f0;
+    background-color: #ffffff;
   }
   table tr:nth-child(even) {
     background-color: #ffffff;
   }
   th {
-    background-color: aliceblue;
+    background-color: rgb(252, 253, 253);
     color: grey;
+  }
+
+  tr .header {
+    background-color: antiquewhite;
+    color: #ffffff;
   }
   
  
