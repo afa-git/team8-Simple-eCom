@@ -50,7 +50,6 @@ export class RegisterComponent implements OnInit {
        no_hp:authForm.value.no_hp,
        date_modified:new Date()
     } 
-    console.log(buyerData)
 
     // for check duplicate account by email
     this.buyerService.getBuyer().subscribe(
@@ -72,7 +71,6 @@ export class RegisterComponent implements OnInit {
     );
 
     if(this.errorMessage == ""){
-      console.log("Start")
       // for post data auth
       this.authService.signup(authReqData).subscribe(
           resdata=>{

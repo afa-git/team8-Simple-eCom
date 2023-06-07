@@ -35,8 +35,6 @@ export class ProductAddComponent implements OnInit {
     if(!postData.valid)
       return
       
-    console.log("postData",postData)
-
     const img:any = [];
     img.push(postData.value.img_url_1);
     img.push(postData.value.img_url_2);
@@ -54,14 +52,12 @@ export class ProductAddComponent implements OnInit {
         description:postData.value.description,
         category:postData.value.category
     }
-    console.log("dataProduct",dataProduct)
 
     //Check Id Product
     this.productService.getProducts().subscribe(
       (response)=> {
         console.log("response",response);
         const filteredResults = response.filter(item => item.trx_id.toLowerCase().includes(postData.value.trx_id.toLowerCase()));
-        console.log("filteredResults",filteredResults)
         
         if(filteredResults.length > 0){
           alert("Trx ID is exist")    
@@ -70,7 +66,7 @@ export class ProductAddComponent implements OnInit {
           this.productService.postProduct(dataProduct).subscribe(
             (data) => {
               console.log(data);
-              alert("Product Add")
+              alert("Product is Successfully Added")
               postData.reset()
             },
             (error) => {

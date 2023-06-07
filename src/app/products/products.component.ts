@@ -19,7 +19,6 @@ export class ProductsComponent implements OnInit {
   }
 
   onDetail(id:String){
-    console.log('masuk')
     this.router.navigate(['products',id])
   }
 

@@ -52,7 +52,6 @@ export class AuthService {
   }
 
   signin(authRequestData: AuthRequestData){
-    console.log("role",authRequestData)
     return this.httpClient.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDbtOA5M-4tFbFa_TWjXgO72J0Q1efm9k8',{
       email:authRequestData.email,
       password:authRequestData.password,
@@ -75,13 +74,11 @@ export class AuthService {
       role:string
     } = JSON.parse(localStorage.getItem('userData')!)
 
-    console.log("data",userData)
     if(!userData){
       return;
     }
 
     const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate),userData.role);
-    console.log("loadedUser",loadedUser.token)
     if(loadedUser.token){
       this.userSubject.next(loadedUser);
 
@@ -92,7 +89,6 @@ export class AuthService {
 
 
   logout(){
-    console.log('log')
     this.userSubject.next(null!);
     this.router.navigate(["/auth"])
     localStorage.removeItem('userData')
@@ -106,8 +102,6 @@ export class AuthService {
 
 
   private handleError(errorResponse:HttpErrorResponse){
-    console.log("Masuk Error")
-    console.log(errorResponse)
     let errorMsg = 'An unknow error occured!'
     if(!errorResponse.error || !errorResponse.error.error){
       return throwError(errorMsg)

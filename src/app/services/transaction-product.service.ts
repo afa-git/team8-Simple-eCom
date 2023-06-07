@@ -17,8 +17,6 @@ export class TransactionProductService {
 
   //for add to chart product
   addToChartProduct(transactionProduct : TransactionProduct){
-    console.log("Masuk Service")
-    console.log(transactionProduct)
     this.http.post<{name : string}>(this.postURL, transactionProduct,{
       observe:'response'
     }).subscribe(
@@ -60,11 +58,8 @@ export class TransactionProductService {
   setTrxProduct(idTrx:string,refNo:string,arrColumnKey:any,arrColumnVal:any){
     return this.http.get<{[key:string] :TransactionProduct}>(this.postURL).pipe(
       map( responseData => {
-       
-        
+               
         const productArray: TransactionProduct[] = [];
-
-
 
         for(const key in responseData){
           if(responseData.hasOwnProperty(key)){
@@ -72,8 +67,6 @@ export class TransactionProductService {
           }
         }
         const resultResponse = productArray.filter(item => item.ref_no.toLowerCase().includes(refNo.toLowerCase()));
-
-        console.log("data",resultResponse)
 
         let dataUpdate:any = null!
 
@@ -90,7 +83,6 @@ export class TransactionProductService {
 
           }
           dataUpdate = {[idTrx]:trxArray};
-          console.log("data trx result",dataUpdate)
         }),
         catchError(
           errorRes => {

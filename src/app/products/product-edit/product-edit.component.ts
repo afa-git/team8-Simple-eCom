@@ -81,8 +81,6 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     if(!postData.valid)
       return
       
-    console.log("postData",postData)
-
     const img:any = [];
     img.push(postData.value.img_url_1);
     img.push(postData.value.img_url_2);
@@ -99,7 +97,6 @@ export class ProductEditComponent implements OnInit, OnDestroy {
         description:postData.value.description,
         category:postData.value.category
     }
-    console.log("dataProduct",dataProduct)
 
     this.productService.onUpdatePost(dataProduct);
 
@@ -110,7 +107,6 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       return
 
     let id:any = postData.value.id;
-    console.log("dataProduct",id)
 
     this.productService.deletePosts(id);
   }

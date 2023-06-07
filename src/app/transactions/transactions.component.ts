@@ -34,7 +34,6 @@ export class TransactionsComponent implements OnInit {
             this.dataTransactions = response;
           }else{
             const filteredResults = response.filter(item=>item.email.includes(this.userSubject.email))
-            console.log("trx prod",filteredResults)
             this.dataTransactions = filteredResults;
           }
 
@@ -95,7 +94,6 @@ export class TransactionsComponent implements OnInit {
     this.transactionServ.setTrxProduct(dataIn.id!,dataIn.ref_no,arrColumnKey,arrColumnVal).subscribe(
       (data)=>{
 
-        console.log("data res",data)
         this.transactionServ.updateTransactionProduct(data).subscribe(
             (response)=>{
               console.log("update response",response)

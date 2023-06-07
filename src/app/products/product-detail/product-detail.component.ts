@@ -76,7 +76,7 @@ export class ProductDetailComponent implements OnInit {
       alert("You dont have account, Please register now !")
       return
     }else{
-      alert("WOW")
+      alert("Product is Successfully Added to Chart")
 
       // get data buyer 
       this.buyerServe.getBuyer().subscribe(

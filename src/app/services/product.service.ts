@@ -18,8 +18,6 @@ export class ProductService {
 
 //for add to chart product
 addToChartProduct(transactionProduct : TransactionProduct){
-  console.log("Masuk Service")
-  console.log(transactionProduct)
   this.http.post<{name : string}>(this.postURL, transactionProduct,{
     observe:'response'
   }).subscribe(
@@ -74,8 +72,7 @@ addToChartProduct(transactionProduct : TransactionProduct){
 
     this.http.patch(this.postURL, data).subscribe(
       (data) => {
-        console.log(data);
-        alert("Edit Data Berhasil ^^");
+        alert("Product is Successfully Edited");
       }
     );
   }
@@ -84,8 +81,7 @@ addToChartProduct(transactionProduct : TransactionProduct){
     let url =this.endPointURL+'product/'+id+'.json';
     this.http.delete(url).subscribe(
       (id) => {
-        console.log(id);
-        alert("Hapus Data Berhasil -_-");
+        alert("Product is Successfully Deleted");
         return;
       }
     );
@@ -103,7 +99,6 @@ addToChartProduct(transactionProduct : TransactionProduct){
         }
 
         const productRes = productArray.filter(item=>item.trx_id.toLowerCase().includes(productId.toLowerCase()))
-        console.log("data Product res",productRes)
         let dataUpdate:any = null!
 
         productRes.map( responseData2 => {
@@ -127,7 +122,6 @@ addToChartProduct(transactionProduct : TransactionProduct){
             }
           }
           dataUpdate = {[idProd]:trxArray};
-          console.log("data trx result Prod",dataUpdate)
         }),
         catchError(
           errorRes => {

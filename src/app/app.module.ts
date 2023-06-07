@@ -15,7 +15,7 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { ProductAddComponent } from './products/product-add/product-add.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductEditComponent} from './products/product-edit/product-edit.component'
-import { ShortenPipe } from './shorten.pipe';
+import { ShortenPipe } from './pipe/shorten.pipe';
 import { DashboardAdminComponent } from './admin/dashboard-admin/dashboard-admin.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { SimpleReportComponent } from './admin/simple-report-product/simple-report.component';
