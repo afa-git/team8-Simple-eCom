@@ -11,7 +11,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductAddComponent implements OnInit {
 
-  constructor(private productService: ProductAdminService) { }
+  constructor(private productService: ProductService) { }
 
   dataProducts:Product[] = [];
 

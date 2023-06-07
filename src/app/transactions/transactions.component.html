@@ -1,8 +1,9 @@
 <div class="container">
     <h2 class="title">Transaction Products</h2>
+
     <div *ngFor="let transaction of dataTransactions">
         <div class="card mb-5" >
-            <h5 class="card-header">Ref No : {{ transaction.ref_no }} - <span class="badge bg-primary">{{ transaction.status_trx | product:'status' }}</span></h5>
+            <h5 class="card-header">Ref No : {{ transaction.ref_no }} - {{transaction.email}} <span class="badge bg-primary">{{ transaction.status_trx | product:'status' }}</span></h5>
             <div class="card-body">
                 <div class="row">
                     <div class="col-4">
@@ -18,12 +19,16 @@
                         
                         <!-- Status in chart -->
                         <div *ngIf="transaction.status_trx == '0' && userSubject.role == '2'">
+                            <p>Please pay in VA : </p>
+                            <div class="mb-3"><img src="../../assets/images/bca-logo.png" alt="" style="width: 80px;"> : 08998876767</div>
                             <app-transaction-form [dataTransaction]="transaction"></app-transaction-form>
+                            <a (click)="onUpdateStatus(transaction,'3')" class="btn btn-danger" >Reject Transaction</a>
                         </div>
 
                         <!-- "Pending Payment" -->
                         <div *ngIf="transaction.status_trx == '1' && userSubject.role == '2' ">
-                            
+                            <p>Please pay in VA : </p>
+                            <div class="mb-3"><img src="../../assets/images/bca-logo.png" alt="" style="width: 80px;"> : 08998876767</div>
                             <a (click)="onUpdateStatus(transaction,'2')" class="btn btn-success" >I Already Paid</a>
                         </div>
 

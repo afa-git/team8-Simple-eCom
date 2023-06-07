@@ -1,34 +1,32 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { jsPDF } from 'jspdf';
 import { Subscription } from 'rxjs';
-import { ProductAdminService } from '../../services/product-admin.service';
+import { ProductService } from 'src/app/services/product.service';
+import { Product } from 'src/app/models/product.model';
 
 @Component({
   selector: 'app-simple-report',
   templateUrl: './simple-report.component.html',
   styleUrls: ['./simple-report.component.css']
 })
-export class SimpleReportComponent implements OnInit, OnDestroy {
+export class SimpleReportComponent implements OnInit{
 
   loadedPosts : any []= [];
   showLoading = false;
 
-  constructor(private productService: ProductAdminService) { }
+  constructor(private productService: ProductService) { }
+
+  dataProducts:Product[] = [];
 
   ngOnInit(): void {
     this.fetchPosts();
-    this.errorSub = this.productService.errorHandling.subscribe(
-      error => {
-        this.error = error;
-      }
-    )
   }
+
   error = null;  
   errorSub!: Subscription;
   public fetchPosts(){
-
     this.showLoading = true;
-    this.productService.fetchPosts()
+    this.productService.getProducts()
     .subscribe(
       posts => {
         this.showLoading = false;
@@ -51,8 +49,5 @@ export class SimpleReportComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.errorSub.unsubscribe();
-  }
 
 }

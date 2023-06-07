@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Buyer } from 'src/app/models/buyer.model';
 import { Product } from 'src/app/models/product.model';
 import { TransactionProduct } from 'src/app/models/transaction-product.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { BuyerService } from 'src/app/services/buyer.service';
 import { ProductService } from 'src/app/services/product.service';
 import { TransactionProductService } from 'src/app/services/transaction-product.service';
@@ -20,10 +21,19 @@ export class ProductDetailComponent implements OnInit {
   img_url:any[] = [];
   dataBuyer: Buyer = new Buyer("","","","","","",new Date());
 
-  constructor(private transactionProductServe:TransactionProductService, private productServ:ProductService, private activatedRoute:ActivatedRoute, private buyerServe:BuyerService) {
-   }
+  
+
+  constructor(private transactionProductServe:TransactionProductService, private productServ:ProductService, private activatedRoute:ActivatedRoute, private buyerServe:BuyerService, private authServ:AuthService) {
+  }
+
+   userSubject = this.authServ.userSubject.value;
+   role ="";
   ngOnInit(): void {
     this.getProductByTrxId(this.activatedRoute.snapshot.params.id);
+    if(this.userSubject){
+      this.role = this.userSubject.role;
+    }
+
   }
   
 

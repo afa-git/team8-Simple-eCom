@@ -61,8 +61,5 @@ export class TransactionFormComponent implements OnInit {
     
   }
 
-  updateStatus(statusTrx:string){
-
-  }
 
 }

@@ -1,49 +1,62 @@
-<app-header-admin></app-header-admin>
-<div class="container">
-  <div class="row">
-    <div class="small-container">
-      <h2 class="title">List Products</h2>
-      <br>
+<h2 class="title">List Products</h2>
+    <br>
       <div class="spinner-border" style="width: 6rem; height: 6rem;"
-    role="status" *ngIf="showLoading && !error">
-    </div>
+        role="status" *ngIf="showLoading && !error">
+      </div>
     <span class="sr-only" *ngIf="showLoading && !error">Loading... </span>
       <p *ngIf="loadedPosts.length < 1 && !showLoading">No posts available!</p>
-      <div class="row">
-        <table>
-          <tr class="header" *ngIf="loadedPosts.length >= 1">        
-            <td style="width:5%; font-weight: bold">No</td>    
-            <td style="width:10%; font-weight: bold">Trx ID</td>
-            <td style="width:20%; font-weight: bold">Name</td>
-            <td style="width:10%; font-weight: bold">Amount</td>
-            <td style="width:5%; font-weight: bold">Stocks</td>
-            <td style="width:20%; font-weight: bold">Image URL</td>
-            <td style="width:10%; font-weight: bold">Category</td>
-            <td style="width:20%; font-weight: bold">Description</td>
-            <td style="width:10%; font-weight: bold">Action</td>
-          </tr>
+        <table class="table" style="width: 60%;">
+          <thead>
+            <tr class="header" *ngIf="loadedPosts.length >= 1">        
+              <td style="width:5%; font-weight: bold">No</td>  
+              <td style="width:20%; font-weight: bold">ID</td>  
+              <td style="width:10%; font-weight: bold">Trx ID</td>
+              <td style="width:10%; font-weight: bold">Name</td>
+              <td style="width:10%; font-weight: bold">Amount</td>
+              <td style="width:5%; font-weight: bold">Stocks</td>
+              <td style="width:20%; font-weight: bold">Image URL</td>
+              <td style="width:10%; font-weight: bold">Category</td>
+              <td style="width:20%; font-weight: bold">Description</td>
+              <td style="width:10%; font-weight: bold">Action</td>
+            </tr>
+          </thead>
+          <tbody>
           <tr *ngFor="let post of loadedPosts; let i= index">        
             <td style="width:5%; font-weight: bold">{{i + 1}}</td>    
+            <td style="width:20%; font-weight: bold; color: rgb(143, 94, 94);">{{post.id | shorten}}</td>
             <td style="width:10%; font-weight: bold; color: rgb(143, 94, 94);">{{post.trx_id}}</td>
-            <td style="width:20%">{{post.title}}</td>
+            <td style="width:10%">{{post.name}}</td>
             <td style="width:10%">{{post.amount}}</td>
             <td style="width:5%">{{post.stocks}}</td>
-            <td style="width:20%">{{post.image_url | shorten}}</td>
+            <td style="width:20%">
+              <ul>
+                <li>{{post.image_url[0] | shorten}}</li>
+                <li>{{post.image_url[1] | shorten}}</li>
+                <li>{{post.image_url[2] | shorten}}</li>
+                <li>{{post.image_url[3] | shorten}}</li>
+              </ul>
+            </td>
             <td style="width:10%">{{post.category}}</td>
             <td style="width:20%">{{post.description | shorten}}</td>
-            <td style="width:10% ; font-weight: bold; color: rgb(153 46 46);" (click)="onClickData(post)">Edit</td>
+            <td>
+              <button
+                        class="formbold-btn-edit"
+                        (click)="onClickData(post)"
+                      >
+                      Edit
+                      </button>
+                      </td>
           </tr>
+        </tbody>
         </table>
-      </div>
-  </div>
-  </div>
+        <br>
+        <h2 class="title"> </h2>
+        
     <div class="row">
         <div class="col-2">
-            <!-- <h3 style="margin: 20px 50px 0px;color: brown">Add New Products</h3> -->
             <div class="formbold-main-wrapper">
                 <div class="formbold-form-wrapper">
-                    <!-- <form > -->
-                  <form #updateForm="ngForm" (ngSubmit)="onUpdatePost(updateForm.value)">
+                      <form #postForm="ngForm" >
                     <div class="formbold-mb-5">
                         <label for="name" class="formbold-form-label">ID</label>
                         <input
@@ -73,22 +86,22 @@
                         />
                       </div>
                     <div class="formbold-mb-5">
-                      <label for="title" class="formbold-form-label"> Product Name</label>
+                      <label for="name" class="formbold-form-label"> Product Name</label>
                       <input
                         type="text"
-                        name="title"
-                        id="title"
+                        name="name"
+                        id="name"
                         class="formbold-form-input"
                         required
                         ngModel
-                        name="title"
-                        [ngModel]="title"
+                        name="name"
+                        [ngModel]="name"
                       />
                     </div>
                     <div class="formbold-mb-5">
                       <label for="amount" class="formbold-form-label"> Amount </label>
                       <input
-                        type="text"
+                        type="number"
                         name="amount"
                         id="amount"
                         class="formbold-form-input"
@@ -101,7 +114,7 @@
                     <div class="formbold-mb-5">
                       <label for="stocks" class="formbold-form-label"> Stocks </label>
                       <input
-                        type="text"
+                        type="number"
                         name="stocks"
                         id="stocks"
                         class="formbold-form-input"
@@ -112,32 +125,58 @@
                       />
                     </div>
                     <div class="formbold-mb-5">
-                        <label for="image_url" class="formbold-form-label"> Image URL </label>
+                        <label for="img_url_1" class="formbold-form-label"> Image URL </label>
                         <input
                           type="text"
-                          name="image_url"
-                          id="image_url"
+                          name="img_url_1"
+                          id="img_url_1"
                           class="formbold-form-input"
                           required
                           ngModel
-                          name="image_url"
-                          [ngModel]="image_url"
+                          name="img_url_1"
+                          [ngModel]="img_url_1"
+                        />
+                        <input
+                          type="text"
+                          name="img_url_2"
+                          id="img_url_2"
+                          class="formbold-form-input"
+                          required
+                          ngModel
+                          name="img_url_2"
+                          [ngModel]="img_url_2"
+                        />
+                        <input
+                          type="text"
+                          name="img_url_3"
+                          id="img_url_3"
+                          class="formbold-form-input"
+                          required
+                          ngModel
+                          name="img_url_3"
+                          [ngModel]="img_url_3"
+                        />
+                        <input
+                          type="text"
+                          name="img_url_4"
+                          id="img_url_4"
+                          class="formbold-form-input"
+                          required
+                          ngModel
+                          name="img_url_4"
+                          [ngModel]="img_url_4"
                         />
                     </div>                   
+                    
                     <div class="formbold-mb-5">
-                    <label for="category" class="formbold-form-label"> Category </label>
-                    <input
-                          type="text"
-                          name="category"
-                          id="category"
-                          class="formbold-form-input"
-                          required
-                          ngModel
-                          name="category"
-                          [ngModel]="category"
-                          [readonly] = "true"
-                        />
-                    </div>
+                      <label for="stocks" class="formbold-form-label"> Category </label>
+                      <select id="category" name="category" ngModel class="formbold-form-input" [ngModel]="category">
+                          <option value="shoes" >Shoes</option>
+                          <option value="t-shirt">T-Shirt</option>
+                          <option value="pants">Pants</option>
+                          <option value="bag">Bag</option>
+                        </select>
+                      </div>
                     <div class="formbold-mb-5" >
                         <label for="description" class="formbold-form-label"> Description </label>
                         <input
@@ -153,25 +192,24 @@
                         />
                         </div>
                     <div>
-                      <!-- <button class="formbold-btn">Add New Product</button> -->
                      <div>
                       
                      </div>
                       <button
                       class="formbold-btn"
-                      type="submit"
-                      [disabled]="!updateForm.valid"
+                      (click)="onUpdatePost(postForm)"
+                      [disabled]="!postForm.valid"
                     >
                     Edit Product
                   </button>
                    | 
-                  <!-- <button
-                  [disabled]="loadedPosts.length < 1"
-                  class="formbold-btn-danger"
-                  (click)="onClearPosts(updateForm.value)"
-                >
-                Delete Product
-              </button> -->
+                  <button
+                    [disabled]="!postForm.valid"
+                    class="formbold-btn-danger"
+                    (click)="onClearPosts(postForm)"
+                  >
+                    Delete Product
+                  </button>
                     </div>
                     
                 </form>
@@ -179,4 +217,3 @@
               </div>
         </div>
     </div>
-</div>

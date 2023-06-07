@@ -10,12 +10,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthComponent } from './auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
+import { AuthService } from './services/auth.service';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductAddComponent } from './products/product-add/product-add.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductEditComponent} from './products/product-edit/product-edit.component'
 import { ShortenPipe } from './shorten.pipe';
-import { HeaderAdminComponent } from './admin/header-admin/header-admin.component';
 import { DashboardAdminComponent } from './admin/dashboard-admin/dashboard-admin.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { SimpleReportComponent } from './admin/simple-report-product/simple-report.component';
@@ -23,32 +23,42 @@ import { SimpleReportUserComponent } from './admin/simple-report-user/simple-rep
 import { TransactionsComponent } from './transactions/transactions.component';
 import { ProductPipe } from './pipe/product.pipe';
 import { TransactionFormComponent } from './transactions/transaction-form/transaction-form.component';
-import { AuthGuard } from './guard/auth.guard';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthGuard } from './guard/auth.guard';
+import { SellerGuard } from './guard/seller.guard';
 
 const appRoutes: Routes = [
   {path: '', component:DashboardComponent},
   {path: 'dashboard',component:DashboardComponent},
   {path: 'products', component:ProductsComponent},
   {path: 'products/:id', component:ProductDetailComponent},
-  {path: 'productadd', component:ProductAddComponent},
-  {path: 'auth', component:AuthComponent},
-  {path: 'register', component:RegisterComponent},
 
-  {
-    canActivate:[AuthGuard],
-    path: 'transactions', component:TransactionsComponent
-  },
+  {path: 'auth', component:AuthComponent},
+
   {path: 'register', component:RegisterComponent},
+  {canActivate:[SellerGuard],
+    path: 'productadd', component:ProductAddComponent},
+  {canActivate:[SellerGuard],
+    path: 'productedit', component:ProductEditComponent},
+  {
+    canActivate:[SellerGuard],
+    path: 'admin', component:DashboardAdminComponent},
+  {
+    canActivate:[SellerGuard],
+    path: 'users', component:UserManagementComponent},
+  {
+    canActivate:[SellerGuard],
+    path: 'reportproducts', component:SimpleReportComponent},
+  {canActivate:[SellerGuard],
+    path: 'reportusers', component:SimpleReportUserComponent},
+
+  { canActivate:[AuthGuard],
+    path: 'transactions', component:TransactionsComponent},
+
+
   {path: 'not-found',component:PageNotFoundComponent},
   {path: '**',redirectTo:'/not-found'},
-  
-  {path: 'admin', component:DashboardAdminComponent},
-  {path: 'users', component:UserManagementComponent},
-  {path: 'reportproducts', component:SimpleReportComponent},
-  {path: 'reportusers', component:SimpleReportUserComponent},
-  {path: 'transactions', component:TransactionsComponent},
-
 ];
 
 @NgModule({
@@ -65,15 +75,13 @@ const appRoutes: Routes = [
     AuthComponent,
     ProductEditComponent,
     ShortenPipe,
-    HeaderAdminComponent,
     DashboardAdminComponent,
     UserManagementComponent,
     SimpleReportComponent,
     SimpleReportUserComponent,
     TransactionsComponent,
     ProductPipe,
-    TransactionFormComponent,
-    PageNotFoundComponent
+    TransactionFormComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +89,8 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

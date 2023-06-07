@@ -61,6 +61,36 @@ addToChartProduct(transactionProduct : TransactionProduct){
     return this.http.post<{name:string}>(this.postURL, postData);
   }
 
+  onUpdatePost(updateData:Product) {
+    let data = {[updateData.id!]: { 
+      trx_id: updateData.trx_id,
+      name: updateData.name, 
+      amount: updateData.amount, 
+      stocks: updateData.stocks, 
+      image_url: updateData.image_url,
+      description: updateData.description,
+      category:updateData.category
+    }};
+
+    this.http.patch(this.postURL, data).subscribe(
+      (data) => {
+        console.log(data);
+        alert("Edit Data Berhasil ^^");
+      }
+    );
+  }
+  
+  deletePosts(id:string) {   
+    let url =this.endPointURL+'product/'+id+'.json';
+    this.http.delete(url).subscribe(
+      (id) => {
+        console.log(id);
+        alert("Hapus Data Berhasil -_-");
+        return;
+      }
+    );
+  }
+
   setProduct(productId:string,arrColumnKey:any,arrColumnVal:any){
     return this.http.get<{[key:string] :Product}>(this.postURL).pipe(
       map( responseData => {

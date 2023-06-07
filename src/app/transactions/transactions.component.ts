@@ -30,9 +30,13 @@ export class TransactionsComponent implements OnInit {
     if(this.userSubject != null){
       this.transactionServ.getTransactionProduct().subscribe(
         (response)=>{
-          const filteredResults = response.filter(item=>item.email.includes(this.userSubject.email))
-          console.log("trx prod",filteredResults)
-          this.dataTransactions = filteredResults;
+          if(this.userSubject.role == '1'){
+            this.dataTransactions = response;
+          }else{
+            const filteredResults = response.filter(item=>item.email.includes(this.userSubject.email))
+            console.log("trx prod",filteredResults)
+            this.dataTransactions = filteredResults;
+          }
 
         },
         (error) => {
@@ -54,6 +58,13 @@ export class TransactionsComponent implements OnInit {
         date_modified: new Date(),
         status_trx: statusTrx
       }
+    }else if(statusTrx == '3'){ //3
+      arrColumnKey = ['date_modified','status_trx']
+      arrColumnVal = { 
+        date_modified: new Date(),
+        status_trx: statusTrx
+      }
+
     }else if(statusTrx == '4'){ //4
       arrColumnKey = ['date_modified','status_trx']
       arrColumnVal = { 

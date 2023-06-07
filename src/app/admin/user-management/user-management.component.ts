@@ -1,15 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UsersService } from 'src/app/services/user.service';
-import { Users } from 'src/app/models/ecomm.module';
 import { Subscription } from 'rxjs';
-import { User } from 'src/app/models/user.model';
+import { BuyerService } from 'src/app/services/buyer.service';
 
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.css']
 })
-export class UserManagementComponent implements OnInit,OnDestroy {
+export class UserManagementComponent implements OnInit{
 
   loadedPosts : any []= [];
   showLoading = false;
@@ -21,63 +19,61 @@ export class UserManagementComponent implements OnInit,OnDestroy {
     locked:string='';
     id:string='';
 
-  constructor(private userService: UsersService) { }
+  constructor(private buyerService: BuyerService) { }
 
   ngOnInit(): void {
     this.fetchPosts();
-    this.errorSub = this.userService.errorHandling.subscribe(
-      error => {
-        this.error = error;
-      }
-    )
   }
 
   error = null;  
   errorSub!: Subscription;
   public fetchPosts(){
-
     this.showLoading = true;
-    this.userService.fetchPosts()
-    .subscribe(
-      posts => {
-        this.showLoading = false;
-        this.loadedPosts = posts;
+    this.buyerService.getBuyer().subscribe(
+      (response)=>{
+        this.loadedPosts = response;
       },
-      error => {
-        console.log(error);     
-        this.error = error;  
+      (error)=>{
+        console.log("error",error)
       }
     )
   }
 
-  onClickData(updateData:Users){
-    this.user_id = updateData.user_id;
-    this.user_name = updateData.user_name;
-    this.role = updateData.role;
-    this.enable = updateData.enable;
-    this.locked = updateData.locked;
-    this.id = updateData.id;
-    this.id = updateData.id;
-  }
+  // onClickData(updateData:Users){
+  //   this.user_id = updateData.user_id;
+  //   this.user_name = updateData.user_name;
+  //   this.role = updateData.role;
+  //   this.enable = updateData.enable;
+  //   this.locked = updateData.locked;
+  //   this.id = updateData.id;
+  //   this.id = updateData.id;
+  // }
   
-  onUpdatePost(updateData:Users) {
-    this.userService.onUpdatePost(updateData);
+  // onUpdatePost(updateData:Users) {
+  //   this.userService.onUpdatePost(updateData);
+  // }
+
+  // ngOnDestroy(): void {
+  //   this.errorSub.unsubscribe();
+  // }
+
+  // onCreatePost(postData:{
+  //   id:string;
+  //   user_id:string;
+  //   user_name:string;
+  //   role:'user01';
+  //   enable:'enable';
+  //   locked:'unlocked';
+  // }) {
+  //   // Send Http request
+  //   this.userService.onCreatePost(postData);
+  // }
+
+  onClearUser(id:string) {
+    console.log("dataUser",id)
+
+    this.buyerService.deletePosts(id);
   }
 
-  ngOnDestroy(): void {
-    this.errorSub.unsubscribe();
-  }
-
-  onCreatePost(postData:{
-    id:string;
-    user_id:string;
-    user_name:string;
-    role:'user01';
-    enable:'enable';
-    locked:'unlocked';
-  }) {
-    // Send Http request
-    this.userService.onCreatePost(postData);
-  }
 }
 
