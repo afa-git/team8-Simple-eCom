@@ -1,0 +1,35 @@
+  <div class="small-container">
+    <div class="row">
+        <h2 class="title">Sign In</h2>
+        <div class="col-6">
+            <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+                <div class="form-group">
+                    <label for="email">E-Mail</label>
+                    <input type="email" id="email" class="form-control"
+                    ngModel
+                    name="email"
+                    required
+                    email
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control"
+                    ngModel
+                    name="password"
+                    required
+                    minlength="6"
+                    />
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="submit"
+                    [disabled]="!authForm.valid">
+                    Login
+                    </button> 
+                    <p class="text-center"><b>Belum</b>  punya account yukk daftar <a class="font-weight-bold" style="font-size: 17px; color: blue;" (click)="onRegister()">sini</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

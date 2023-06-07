@@ -1,0 +1,48 @@
+<div class="d-grid gap-2 d-md-flex justify-content-md-start">
+    <button type="button" class="btn btn-primary" (click)="makePDF()" > 
+      Download
+  </button>
+  </div>
+<br>
+<div id="report" #report> 
+    <p class="card-title">Team 8 - E Commerce</p>
+  <p class="card-subtitle mb-2 text-body-secondary">Report Products</p>
+    <br>
+    <span class="sr-only" *ngIf="showLoading && !error">Loading... </span>
+    <p *ngIf="loadedPosts.length < 1 && !showLoading">No posts available!</p>
+    <table class="table">
+        <thead>
+            <tr class="header" *ngIf="loadedPosts.length >= 1">        
+                <th scope="col">No</th>  
+                <th scope="col">ID</th>  
+                <th scope="col">Trx ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Stocks</th>
+                <th scope="col">Image URL</th>
+                <th scope="col">Category</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr *ngFor="let post of loadedPosts; let i= index">        
+                <th style="font-weight: bold">{{i + 1}}</th>    
+                <th style="font-weight: bold; color: rgb(143, 94, 94);">{{post.id | shorten}}</th>
+                <th style="font-weight: bold; color: rgb(143, 94, 94);">{{post.trx_id}}</th>
+                <th >{{post.name}}</th>
+                <th >{{post.amount}}</th>
+                <th >{{post.stocks}}</th>
+                <th >
+                    <ul>
+                    <li>{{post.image_url[0] | shorten}}</li>
+                    <li>{{post.image_url[1] | shorten}}</li>
+                    <li>{{post.image_url[2] | shorten}}</li>
+                    <li>{{post.image_url[3] | shorten}}</li>
+                    </ul>
+                </th>
+                <th >{{post.category}}</th>
+                <th >{{post.description | shorten}}</th>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,30 @@
+<div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a [routerLink]="['dashboard']">Anggi Sport Store</a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a [routerLink]="['dashboard']">Home</a></li>
+                    <li><a [routerLink]="['products']">Products</a></li>
+                    <li><a [routerLink]="['productadd']">Add Products</a></li>
+                    <li><a [routerLink]="['productedit']">Edit Products</a></li>
+                    <li><a [routerLink]="['users']">Manage User</a></li>
+                    <li><a [routerLink]="['reportproducts']">Report Products</a></li>
+                    <li><a [routerLink]="['reportusers']">Report User</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a [routerLink]="['auth']" *ngIf="!isAuthenticated">Sign In</a></li>
+                    <li><a (click)="onLogout()"  *ngIf="isAuthenticated" >Logout</a></li>
+                </ul>
+            </nav>
+            <a [routerLink]="['transactions']" class="position-relative"><img src="../../assets/images/cart.png" width="30px" height="30px" *ngIf="isAuthenticated"><span *ngIf="countActiveTrx > 0 " class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ countActiveTrx }}
+                <span class="visually-hidden">unread messages</span>
+              </span></a>
+            <img src="../../assets/images/menu.png" class="menu-icon" (click)="menutoggle()">
+        </div>
+    </div>
+</div>
+        
+
