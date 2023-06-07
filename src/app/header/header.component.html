@@ -16,6 +16,7 @@
                     <li *ngIf="role == '1'"><a [routerLink]="['transactions']">Transactions</a></li>
                     <li *ngIf="!isAuthenticated"><a [routerLink]="['auth']" >Sign In</a></li>
                     <li *ngIf="isAuthenticated"><a (click)="onLogout()"   >Logout</a></li>
+
                 </ul>
             </nav>
             <a *ngIf="role == '2'" [routerLink]="['transactions']" class="position-relative"><img src="../../assets/images/cart.png" width="30px" height="30px" ><span *ngIf="countActiveTrx > 0 " class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">

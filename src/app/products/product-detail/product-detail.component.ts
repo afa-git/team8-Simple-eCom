@@ -21,13 +21,14 @@ export class ProductDetailComponent implements OnInit {
   img_url:any[] = [];
   dataBuyer: Buyer = new Buyer("","","","","","",new Date());
 
-  
+
 
   constructor(private transactionProductServe:TransactionProductService, private productServ:ProductService, private activatedRoute:ActivatedRoute, private buyerServe:BuyerService, private authServ:AuthService) {
   }
 
    userSubject = this.authServ.userSubject.value;
    role ="";
+
   ngOnInit(): void {
     this.getProductByTrxId(this.activatedRoute.snapshot.params.id);
     if(this.userSubject){
