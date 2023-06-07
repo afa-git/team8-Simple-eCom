@@ -27,6 +27,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from './guard/auth.guard';
 import { SellerGuard } from './guard/seller.guard';
+import { AboutComponent } from './about/about.component';
 
 
 const appRoutes: Routes = [
@@ -57,9 +58,9 @@ const appRoutes: Routes = [
   { canActivate:[AuthGuard],
     path: 'transactions', component:TransactionsComponent},
 
-
+  {path: 'about', component:AboutComponent},
   {path: 'not-found',component:PageNotFoundComponent},
-  {path: '**',redirectTo:'/not-found'},
+  {path: '**',redirectTo:'/not-found'}
 ];
 
 @NgModule({
@@ -82,7 +83,8 @@ const appRoutes: Routes = [
     SimpleReportUserComponent,
     TransactionsComponent,
     ProductPipe,
-    TransactionFormComponent
+    TransactionFormComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

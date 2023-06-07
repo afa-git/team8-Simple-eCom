@@ -14,6 +14,7 @@
                     <li *ngIf="role == '1'"><a [routerLink]="['reportproducts']">Report Products</a></li>
                     <li *ngIf="role == '1'"><a [routerLink]="['reportusers']">Report User</a></li>
                     <li *ngIf="role == '1'"><a [routerLink]="['transactions']">Transactions</a></li>
+                    <li><a [routerLink]="['about']">About Us</a></li>
                     <li *ngIf="!isAuthenticated"><a [routerLink]="['auth']" >Sign In</a></li>
                     <li *ngIf="isAuthenticated"><a (click)="onLogout()"   >Logout</a></li>
 
