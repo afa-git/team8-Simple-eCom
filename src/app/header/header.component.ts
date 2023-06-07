@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
   subUser!: Subscription;
   MenuItems:any
   countActiveTrx:number=0 
+  role:string="";
   
   constructor(private authServ: AuthService, private transactionServ: TransactionProductService,) { 
     
@@ -24,9 +25,12 @@ export class HeaderComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     this.subUser = this.authServ.userSubject.subscribe(
       user => {
-        console.log(!user);
-        console.log(!!user);
+
         this.isAuthenticated = !!user;
+        if(this.isAuthenticated){
+          console.log('user masuk : ',user.role)
+          this.role = user.role;
+        }
 
       }
     )

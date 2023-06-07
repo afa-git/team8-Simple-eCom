@@ -8,17 +8,18 @@
                 <ul id="MenuItems">
                     <li><a [routerLink]="['dashboard']">Home</a></li>
                     <li><a [routerLink]="['products']">Products</a></li>
-                    <li><a [routerLink]="['productadd']">Add Products</a></li>
-                    <li><a [routerLink]="['productedit']">Edit Products</a></li>
-                    <li><a [routerLink]="['users']">Manage User</a></li>
-                    <li><a [routerLink]="['reportproducts']">Report Products</a></li>
-                    <li><a [routerLink]="['reportusers']">Report User</a></li>
-                    <li><a href="">About</a></li>
-                    <li><a [routerLink]="['auth']" *ngIf="!isAuthenticated">Sign In</a></li>
-                    <li><a (click)="onLogout()"  *ngIf="isAuthenticated" >Logout</a></li>
+                    <li *ngIf="role == '1'" ><a [routerLink]="['productadd']">Add Products</a></li>
+                    <li *ngIf="role == '1'"><a [routerLink]="['productedit']">Edit Products</a></li>
+                    <li *ngIf="role == '1'"><a [routerLink]="['users']">Manage User</a></li>
+                    <li *ngIf="role == '1'"><a [routerLink]="['reportproducts']">Report Products</a></li>
+                    <li *ngIf="role == '1'"><a [routerLink]="['reportusers']">Report User</a></li>
+                    <li *ngIf="role == '1'"><a [routerLink]="['transactions']">Transactions</a></li>
+                    <li *ngIf="!isAuthenticated"><a [routerLink]="['auth']" >Sign In</a></li>
+                    <li *ngIf="isAuthenticated"><a (click)="onLogout()"   >Logout</a></li>
+
                 </ul>
             </nav>
-            <a [routerLink]="['transactions']" class="position-relative"><img src="../../assets/images/cart.png" width="30px" height="30px" *ngIf="isAuthenticated"><span *ngIf="countActiveTrx > 0 " class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            <a *ngIf="role == '2'" [routerLink]="['transactions']" class="position-relative"><img src="../../assets/images/cart.png" width="30px" height="30px" ><span *ngIf="countActiveTrx > 0 " class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                 {{ countActiveTrx }}
                 <span class="visually-hidden">unread messages</span>
               </span></a>

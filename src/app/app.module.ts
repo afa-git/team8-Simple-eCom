@@ -24,22 +24,42 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import { ProductPipe } from './pipe/product.pipe';
 import { TransactionFormComponent } from './transactions/transaction-form/transaction-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthGuard } from './guard/auth.guard';
+import { SellerGuard } from './guard/seller.guard';
+
 
 const appRoutes: Routes = [
   {path: '', component:DashboardComponent},
   {path: 'dashboard',component:DashboardComponent},
   {path: 'products', component:ProductsComponent},
   {path: 'products/:id', component:ProductDetailComponent},
-  {path: 'productadd', component:ProductAddComponent},
+
   {path: 'auth', component:AuthComponent},
+
   {path: 'register', component:RegisterComponent},
-  {path: 'productadd', component:ProductAddComponent},
-  {path: 'productedit', component:ProductEditComponent},
-  {path: 'admin', component:DashboardAdminComponent},
-  {path: 'users', component:UserManagementComponent},
-  {path: 'reportproducts', component:SimpleReportComponent},
-  {path: 'reportusers', component:SimpleReportUserComponent},
-  {path: 'transactions', component:TransactionsComponent},
+  {canActivate:[SellerGuard],
+    path: 'productadd', component:ProductAddComponent},
+  {canActivate:[SellerGuard],
+    path: 'productedit', component:ProductEditComponent},
+  {
+    canActivate:[SellerGuard],
+    path: 'admin', component:DashboardAdminComponent},
+  {
+    canActivate:[SellerGuard],
+    path: 'users', component:UserManagementComponent},
+  {
+    canActivate:[SellerGuard],
+    path: 'reportproducts', component:SimpleReportComponent},
+  {canActivate:[SellerGuard],
+    path: 'reportusers', component:SimpleReportUserComponent},
+
+  { canActivate:[AuthGuard],
+    path: 'transactions', component:TransactionsComponent},
+
+
+  {path: 'not-found',component:PageNotFoundComponent},
+  {path: '**',redirectTo:'/not-found'},
 ];
 
 @NgModule({

@@ -21,21 +21,23 @@
             <p>Home / {{ dataProduct.category }}</p>
             <h1>{{ dataProduct.name }}</h1>
             <h4>Rp {{ dataProduct.amount }}</h4>
-            <select *ngIf="dataProduct.category == 'shoes' " ngModel name="size" class="form-select" >
-                <option value="42">42</option>
-                <option value="43">43</option>
-                <option value="44">44</option>
-                <option value="45">45</option>
-            </select>
-            <select *ngIf="dataProduct.category != 'shoes' " ngModel name="size" class="form-select" required>
-                <option value="XXL">XXL</option>
-                <option value="XL">XL</option>
-                <option value="L">L</option>
-                <option value="M">M</option>
-                <option value="S">S</option>
-            </select>
             <h6 class="mt-2">Stocks : {{ dataProduct.stocks }}</h6>
-            <button  type="submit" [disabled]="dataProduct.stocks < 1" class="btn btn-primary">Add To Cart</button>
+            <div *ngIf="role == '2' || role == '' " >
+                <select *ngIf="dataProduct.category == 'shoes' " ngModel name="size" class="form-select" >
+                    <option value="42">42</option>
+                    <option value="43">43</option>
+                    <option value="44">44</option>
+                    <option value="45">45</option>
+                </select>
+                <select *ngIf="dataProduct.category != 'shoes' " ngModel name="size" class="form-select" required>
+                    <option value="XXL">XXL</option>
+                    <option value="XL">XL</option>
+                    <option value="L">L</option>
+                    <option value="M">M</option>
+                    <option value="S">S</option>
+                </select>
+                <button  type="submit" [disabled]="dataProduct.stocks < 1" class="btn btn-primary">Add To Cart</button>
+            </div>
 
             <h3>Product Details <i class="fa fa-indent"></i></h3>
             <br>
