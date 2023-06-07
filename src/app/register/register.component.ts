@@ -78,7 +78,7 @@ export class RegisterComponent implements OnInit {
             // for post data buyer
             this.buyerService.postBuyer(buyerData).subscribe(
               (data) => {
-                alert("Buyer Success Add")
+                alert("User is Successfully Registered")
                 authForm.reset();
               },
               (error) => {
